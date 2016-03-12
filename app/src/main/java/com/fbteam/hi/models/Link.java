@@ -17,7 +17,6 @@ public class Link
 
     public ArrayList<Category> getCategories()
     {
-
         return categories;
     }
 
