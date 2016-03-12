@@ -6,12 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.fbteam.hi.App;
+import com.fbteam.hi.models.App;
 import com.fbteam.hi.R;
-import com.fbteam.hi.models.Category;
 import com.fbteam.hi.models.Link;
 
 
@@ -42,8 +42,11 @@ public class LinksEditAdapter extends ArrayAdapter<Link>{
 //        	bg.setBackgroundColor(Color.parseColor("#F3F3F3"));
 //        }
 
-        View tempShoutViewObject = (TextView)convertView.findViewById(R.id.categoryNameTxt);
-        ((TextView)tempShoutViewObject).setText(link.getName());
+        View tempLinkViewObject = (TextView)convertView.findViewById(R.id.linkNameTxt);
+        ((TextView)tempLinkViewObject).setText(link.getName());
+
+        tempLinkViewObject = (CheckBox)convertView.findViewById(R.id.checkBox);
+
 
 //        AppManager.fontTextView(nameLabel, 23);
 

@@ -3,21 +3,14 @@ package com.fbteam.hi.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.fbteam.hi.App;
+import com.fbteam.hi.models.App;
 import com.fbteam.hi.Configuration;
 import com.fbteam.hi.R;
 import com.fbteam.hi.models.User;
@@ -50,6 +43,7 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
     public void setInitialData(){
         // read if user is here the first time ever or restore
         User me = new User();
+
         App.setCurrentUser(me);
         SharedPreferences settings = getSharedPreferences(Configuration.DB_PREFERENCES, 0);
         boolean registered = settings.getBoolean("registered", true);

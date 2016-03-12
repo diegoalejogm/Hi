@@ -2,7 +2,6 @@ package com.fbteam.hi.adapters;
 
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.fbteam.hi.App;
+import com.fbteam.hi.models.App;
 import com.fbteam.hi.R;
 import com.fbteam.hi.models.Category;
-
-import java.util.ArrayList;
 
 
 public class CategoryListAdapter extends ArrayAdapter<Category>{
@@ -44,7 +41,7 @@ public class CategoryListAdapter extends ArrayAdapter<Category>{
 //        	bg.setBackgroundColor(Color.parseColor("#F3F3F3"));
 //        }
 
-        View tempShoutViewObject = (TextView)convertView.findViewById(R.id.linkName);
+        View tempShoutViewObject = (TextView)convertView.findViewById(R.id.categoryNameTxt);
         ((TextView)tempShoutViewObject).setText(category.getName());
 
 //        AppManager.fontTextView(nameLabel, 23);

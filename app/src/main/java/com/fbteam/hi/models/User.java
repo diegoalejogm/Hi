@@ -56,12 +56,12 @@ public class User {
 
             }
             categories.setLength(categories.length() - 1);
-            preferences.edit().putString("link/"+linkCounter+"/categories",categories.toString());
+            preferences.edit().putString("link/"+ (linkCounter++) +"/categories",categories.toString());
         }
 
         for(Category category : this.categories)
         {
-            preferences.edit().putString("category/"+categoryCounter, category.toString());
+            preferences.edit().putString("category/" + (categoryCounter++), category.toString());
         }
     }
 
