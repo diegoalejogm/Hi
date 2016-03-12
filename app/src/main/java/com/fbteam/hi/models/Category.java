@@ -10,7 +10,6 @@ public class Category
 
     private String id;
     private String name;
-
     private ArrayList<Link> links;
 
     public Category(String name)
@@ -22,6 +21,7 @@ public class Category
 
     public static Category fromString(String string)
     {
+        //public Link(String name, String content, boolean verified)
         String[] attribute = string.split(",");
         return new Category(attribute[0]);
     }
@@ -58,4 +58,10 @@ public class Category
     {
         return links;
     }
+
+
+    public Link getLinkByID(int id){
+        return links.get(id);
+    }
+
 }
