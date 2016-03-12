@@ -26,7 +26,7 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
 
 
     private int[] activity_buttons = {
-            R.id.doneButton,
+            R.id.offlineMode,
             R.id.importFromFb,
             R.id.importFromContact
     };
@@ -75,10 +75,10 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
             activity_button.setOnClickListener(this);
         }
 
-        ImageView tempImageView = (ImageView) findViewById(R.id.nameImageView);
-        tempImageView.getDrawable().setColorFilter(getResources().getColor(R.color.primary), PorterDuff.Mode.SRC_ATOP);
-        tempImageView = (ImageView) findViewById(R.id.passwordImageView);
-        tempImageView.getDrawable().setColorFilter(getResources().getColor(R.color.primary), PorterDuff.Mode.SRC_ATOP);
+//        ImageView tempImageView = (ImageView) findViewById(R.id.nameImageView);
+//        tempImageView.getDrawable().setColorFilter(getResources().getColor(R.color.primary), PorterDuff.Mode.SRC_ATOP);
+//        tempImageView = (ImageView) findViewById(R.id.passwordImageView);
+//        tempImageView.getDrawable().setColorFilter(getResources().getColor(R.color.primary), PorterDuff.Mode.SRC_ATOP);
     }
 
 
