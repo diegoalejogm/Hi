@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.facebook.FacebookSdk;
+
 import com.fbteam.hi.Configuration;
 import com.fbteam.hi.R;
 

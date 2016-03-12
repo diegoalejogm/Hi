@@ -6,4 +6,6 @@
 
     <string name="action_settings">Settings</string>
 	<string name="title_activity_capture_qractivity_any_orientation">CaptureQRActivityAnyOrientation</string>
+
+    <string name="facebook_app_id">693673284105732</string>
 </resources>
