@@ -7,13 +7,14 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Scan user" />
         <item
+            android:id="@+id/nav_new_category"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Add new category" />
+        <item
             android:id="@+id/nav_edit_links"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Edit links" />
-        <item
-            android:id="@+id/nav_edit_categories"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Edit categories" />
+            android:title="Edit my profile" />
+
     </group>
 
     <item android:title="Communicate">
@@ -21,7 +22,7 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="Share app on fb!" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
