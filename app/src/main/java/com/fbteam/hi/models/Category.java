@@ -23,10 +23,10 @@ public class Category
         links = new ArrayList<>();
     }
 
-    public static Category fromString(String string)
+    public static Category fromStringEncoding(String string, String separator)
     {
         //public Link(String name, String content, boolean verified)
-        String[] attribute = string.split(",");
+        String[] attribute = string.split(separator);
         return new Category(attribute[0]);
     }
 
@@ -47,16 +47,17 @@ public class Category
         return name;
     }
 
-    public String toString()
+    public String toStringEncoding(String separator)
     {
         StringBuffer sb = new StringBuffer(name);
         for(Link link : this.links)
         {
-            sb.append(link.getId()+"&");
+            sb.append(link.getId()+separator);
         }
         sb.setLength(sb.length() - 1);
         return sb.toString();
     }
+
 
     public ArrayList<Link> getLinks()
     {
