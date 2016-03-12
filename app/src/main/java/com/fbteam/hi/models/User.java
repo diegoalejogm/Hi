@@ -28,6 +28,4 @@ public class User {
         this.links = new ArrayList<>();
         this.categories = new ArrayList<>();
     }
-
-
 }
