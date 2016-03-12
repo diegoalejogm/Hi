@@ -22,12 +22,10 @@ public class User {
     ArrayList<Link> links;
     ArrayList<Category> categories;
 
-    public User(String id, String firstNames, String lastNames) {
-        this.id = firstName + lastName;
-        this.firstName = firstNames;
-        this.lastName = lastNames;
-        this.links = new ArrayList<>();
-        this.categories = new ArrayList<>();
+
+    public User(){
+        links = new ArrayList<Link>();
+        categories = new ArrayList<Category>();
     }
 
     public ArrayList<Link> getLinks()
