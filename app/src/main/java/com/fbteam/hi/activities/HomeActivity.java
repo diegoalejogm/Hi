@@ -33,7 +33,6 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
     // list view
     private ListView categoriesList;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
