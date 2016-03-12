@@ -29,5 +29,13 @@ public class User {
         this.categories = new ArrayList<>();
     }
 
+    public ArrayList<Link> getLinks()
+    {
+        return links;
+    }
 
+    public ArrayList<Category> getCategories()
+    {
+        return categories;
+    }
 }

@@ -11,7 +11,7 @@ public class Category
     private String id;
     private String name;
 
-    ArrayList<Link> links;
+    private ArrayList<Link> links;
 
     public Category(String name)
     {
@@ -22,5 +22,15 @@ public class Category
     public void addLink(Link link)
     {
         links.add(link);
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public ArrayList<Link> getLinks()
+    {
+        return links;
     }
 }

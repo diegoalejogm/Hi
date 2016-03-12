@@ -1,6 +1,7 @@
 package com.fbteam.hi.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.fbteam.hi.R;
+import com.fbteam.hi.ShowQRActivity;
 import com.fbteam.hi.helper.CaptureQRActivityAnyOrientation;
 import com.google.zxing.integration.android.IntentIntegrator;
 
@@ -35,6 +37,9 @@ public class HomeActivity extends Activity implements View.OnClickListener  {
             {
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 new IntentIntegrator(HomeActivity.this).setCaptureActivity(CaptureQRActivityAnyOrientation.class).setBeepEnabled(true).setOrientationLocked(false).initiateScan();
+                Intent intent = new Intent(HomeActivity.this, ShowQRActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
