@@ -8,20 +8,39 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.fbteam.hi.App;
 import com.fbteam.hi.Configuration;
 import com.fbteam.hi.R;
+
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by nik on 12/03/16.
@@ -29,6 +48,7 @@ import com.fbteam.hi.R;
 
 public class LoginActivity extends Activity implements View.OnClickListener  {
 
+    CallbackManager callbackManager;
 
     private int[] activity_buttons = {
             R.id.importFromFb,
@@ -38,11 +58,53 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_login);
         // set Initial data
         setInitialData();
-        // find all elements in the acitivty
+        // find all elements in the activity
         findActivityElements();
+
+        callbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        GraphRequest request = GraphRequest.newMeRequest(
+                                loginResult.getAccessToken(),
+                                new GraphRequest.GraphJSONObjectCallback() {
+                                    @Override
+                                    public void onCompleted(JSONObject object, GraphResponse response) {
+                                        // Application code
+                                        String name = null;
+                                        String email = null;
+                                        String linkUri = null;
+                                        try {
+                                            name = object.getString("name");
+                                            email = object.getString("email");
+                                            linkUri = object.getString("linkUri");
+                                            openHomeActivity(Configuration.IMPORT_INFO_FROM_FACEBOOK);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+                        Bundle parameters = new Bundle();
+                        parameters.putString("fields", "id,name,email,gender,birthday,linkUri");
+                        request.setParameters(parameters);
+                        request.executeAsync();
+                        System.out.println("LOGIN RESULT");
+                    }
+
+                    @Override
+                    public void onCancel() {
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        System.out.println("ERROR");
+                    }
+                });
     }
 
     /**
@@ -75,7 +137,8 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
 
         TextView txt = (TextView) this.findViewById(R.id.offlineMode);
         txt.setOnClickListener(this);
-
+        LoginButton loginButton = (LoginButton) this.findViewById(R.id.importFromFb);
+        loginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_birthday", "user_friends"));
 //        ImageView tempImageView = (ImageView) findViewById(R.id.nameImageView);
 //        tempImageView.getDrawable().setColorFilter(getResources().getColor(R.color.primary), PorterDuff.Mode.SRC_ATOP);
 //        tempImageView = (ImageView) findViewById(R.id.passwordImageView);
@@ -115,13 +178,14 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
                 importInformationFrom(Configuration.IMPORT_INFO_FROM_ADDRESSBOOK);
                 openHomeActivity(Configuration.ONLINE_MODE_APP);
                 break;
-            case R.id.importFromFb:         // import from fb
-                importInformationFrom(Configuration.IMPORT_INFO_FROM_FACEBOOK);
-                openHomeActivity(Configuration.ONLINE_MODE_APP);
-                break;
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
 //    public void login(final int appMode){
 //        // change UI
 //        findViewById(R.id.usernameEditText).setEnabled(false);
