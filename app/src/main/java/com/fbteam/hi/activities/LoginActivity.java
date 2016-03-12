@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.fbteam.hi.App;
 import com.fbteam.hi.Configuration;
 import com.fbteam.hi.R;
+import com.fbteam.hi.models.User;
 
 /**
  * Created by nik on 12/03/16.
@@ -48,7 +49,8 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
      */
     public void setInitialData(){
         // read if user is here the first time ever or restore
-
+        User me = new User();
+        App.setCurrentUser(me);
         SharedPreferences settings = getSharedPreferences(Configuration.DB_PREFERENCES, 0);
         boolean registered = settings.getBoolean("registered", true);
 

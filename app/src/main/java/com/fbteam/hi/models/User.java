@@ -17,6 +17,11 @@ public class User {
     ArrayList<Link> links;
     ArrayList<Category> categories;
 
+    public User(){
+        links = new ArrayList<Link>();
+        categories = new ArrayList<Category>();
+    }
+
     public User(String id, ArrayList<Link> links, ArrayList<Category> categories) {
         this.id = id;
         this.links = links;
