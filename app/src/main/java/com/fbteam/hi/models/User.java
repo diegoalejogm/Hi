@@ -43,7 +43,6 @@ public class User {
         c1.addLink(link2);
         Category c2 = new Category("Professional");
         c2.addLink(link2);
-        c2.addLink(link3);
 
         links.add(link1);
         links.add(link2);

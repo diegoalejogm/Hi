@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.fbteam.hi.Configuration;
 import android.widget.Toast;
 import com.fbteam.hi.R;
 import com.fbteam.hi.ShowQRActivity;
@@ -57,15 +57,30 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
             @Override
 
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                System.out.println("on item click" + i + " " + l + " "  + view.getId());
                 Category category = (Category) adapterView.getItemAtPosition(i);
                 // create
                 showQR(category);
             }
         });
+        categoriesList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           int pos, long id) {
+                processLongClickOnCategory(pos);
+                return true;
+            }
+        });
     }
 
+    private void processLongClickOnCategory(int id){
+        System.out.println("category pro-clicked " + id);
+        Intent intent = new Intent(this, EditCategoryActivity.class);
+        intent.putExtra(Configuration.CATEGORY_ID, id);
+        startActivityForResult(intent, 9090);
+    }
 
-    public void showQR(Category category){
+    private void showQR(Category category){
         Intent intent = new Intent(this, ShowQRActivity.class);
         intent.putExtra("categoryId", category.getId());
         startActivityForResult(intent, 9090);

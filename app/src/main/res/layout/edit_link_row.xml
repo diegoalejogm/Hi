@@ -31,9 +31,9 @@
             android:hint="username"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:theme="@style/EditTextTheme"
             android:textColor="@color/primary_dark"
             android:textAlignment="center"
-            android:text="nshevchenko" />
+            android:text="nshevchenko"
+            android:theme="@style/EditTextTheme" />
     </RelativeLayout>
 </RelativeLayout>

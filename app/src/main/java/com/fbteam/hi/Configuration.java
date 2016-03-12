@@ -18,7 +18,7 @@ public class Configuration {
 
     // storage
     public static final String DB_PREFERENCES = "MyPreferences";
-
+    public static final String CATEGORY_ID = "CategoryID";
 
     public static final int TYPE_LINK_PHONE = 0;
     public static final int TYPE_LINK_WEBSITE =  1;
