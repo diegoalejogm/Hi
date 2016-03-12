@@ -103,14 +103,13 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
                                     String lastName = object.getString("last_name");
                                     String email = object.getString("email");
                                     String link = object.getString("link");
-                                    System.out.println("######## " + link);
                                     App.getMe().setFirstName(firstName);
                                     App.getMe().setLastName(lastName);
                                     if (email != null) {
                                         Link emailLink = new Link("email", email, true);
                                         App.getMe().addLinkNoCategory(emailLink);
                                     }
-                                    Link facebookLink = new Link("facebook", link, true);
+                                    Link facebookLink = new Link("facebook", link.replace("https://www.facebook.com/app_scoped_user_id/", ""), true);
                                     App.getMe().addLinkNoCategory(facebookLink);
                                     openHomeActivity(Configuration.IMPORT_INFO_FROM_FACEBOOK);
                                 } catch (JSONException e) {

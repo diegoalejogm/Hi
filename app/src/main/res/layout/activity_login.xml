@@ -69,7 +69,7 @@
             android:textColor="@color/accent"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:visibility="visible"
             android:background="@drawable/round_corners_button"
             android:textSize="15sp"
