@@ -2,7 +2,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/feedsLayoutBg"
+    android:id="@+id/layoutBg"
     android:weightSum="1.0">
 
     <RelativeLayout
@@ -20,12 +20,12 @@
             android:textColor="@color/accent"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="50dp" />
+            android:layout_marginLeft="10dp" />
 
         <EditText
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"
+            android:id="@+id/editContent"
             android:layout_alignParentRight="true"
             android:textSize="20sp"
             android:hint="username"

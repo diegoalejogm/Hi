@@ -29,12 +29,12 @@
 				android:theme="@style/AppTheme.NoActionBar">
 		</activity>
 		<activity
-			android:name=".activities.CategoryEditActivity"
+			android:name=".activities.EditCategoryActivity"
 			android:label="@string/title_activity_capture_qractivity_any_orientation"
 			android:theme="@style/AppTheme.NoActionBar">
 		</activity>
 		<activity
-			android:name=".activities.LinksEditActivity"
+			android:name=".activities.EditLinksActivity"
 			android:label="@string/title_activity_capture_qractivity_any_orientation"
 			android:theme="@style/AppTheme.NoActionBar">
 		</activity>

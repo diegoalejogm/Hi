@@ -55,20 +55,20 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
         categoriesList.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-            {
-                Category clickedShout = (Category) adapterView.getItemAtPosition(i);
+
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Category category = (Category) adapterView.getItemAtPosition(i);
                 // create
-//                clickedShout.createQRCode();
-
-
-//                FragmentShoutDetail fragmentShoutDetail = new FragmentShoutDetail();
-//                fragmentShoutDetail.setShoutDetail(clickedShout);
-//
-//                fragmentShoutDetail.show(getFragmentManager(), "Shout detail");
+                showQR(category);
             }
         });
+    }
 
+
+    public void showQR(Category category){
+        Intent intent = new Intent(this, ShowQRActivity.class);
+        intent.putExtra("categoryId", category.getId());
+        startActivityForResult(intent, 9090);
     }
 
     @Override
