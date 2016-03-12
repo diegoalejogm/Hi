@@ -33,6 +33,7 @@ import com.facebook.login.widget.LoginButton;
 import com.fbteam.hi.models.App;
 import com.fbteam.hi.Configuration;
 import com.fbteam.hi.R;
+import com.fbteam.hi.models.Link;
 import com.fbteam.hi.models.User;
 
 
@@ -95,15 +96,22 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 try {
-                                    String first_name = object.getString("first_name");
-                                    String last_name = object.getString("last_name");
+                                    String firstName = object.getString("first_name");
+                                    String lastName = object.getString("last_name");
                                     String email = object.getString("email");
                                     String link = object.getString("link");
-                                    
+                                    System.out.println("######## " + link);
+                                    App.getMe().setFirstName(firstName);
+                                    App.getMe().setLastName(lastName);
+                                    if (email != null) {
+                                        Link emailLink = new Link("email", email, true);
+                                        App.getMe().addLinkNoCategory(emailLink);
+                                    }
+                                    Link facebookLink = new Link("facebook", link, true);
+                                    App.getMe().addLinkNoCategory(facebookLink);
                                     openHomeActivity(Configuration.IMPORT_INFO_FROM_FACEBOOK);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -120,6 +128,7 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
 
                     @Override
                     public void onCancel() {
+                        System.out.println("CANCEL");
                     }
 
                     @Override
