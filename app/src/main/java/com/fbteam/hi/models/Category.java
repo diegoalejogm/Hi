@@ -1,5 +1,9 @@
 package com.fbteam.hi.models;
 
+import android.content.Intent;
+
+import com.fbteam.hi.ShowQRActivity;
+
 import java.util.ArrayList;
 
 /**
@@ -59,9 +63,15 @@ public class Category
         return links;
     }
 
-
     public Link getLinkByID(int id){
         return links.get(id);
     }
 
+
+    public boolean containsLink(Link link){
+        for (Link tempL : links)
+            if(tempL.getName().equals(link.getName()))
+                return true;
+        return false;
+    }
 }

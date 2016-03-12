@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -24,11 +25,13 @@ public class EditCategoryListAdapter extends ArrayAdapter<Link> {
     private int resource;
     private LayoutInflater inflater;
     private Context context;
+    private Category editingCategory;
 
-    public EditCategoryListAdapter(Context ctx, int resourceId)
+    public EditCategoryListAdapter(Context ctx, int resourceId, Category category)
     {
-        super(ctx, resourceId, App.getMe().getLinks());
+        super(ctx, resourceId, category.getLinks());
         resource = resourceId;
+        editingCategory = category;
         inflater = LayoutInflater.from( ctx );
         context  = ctx;
     }
@@ -37,24 +40,22 @@ public class EditCategoryListAdapter extends ArrayAdapter<Link> {
     public View getView ( int position, View convertView, ViewGroup parent )
     {
         convertView = (RelativeLayout) inflater.inflate( resource, null );
-        Category category = App.getMe().getCategories().get(position);
+        Link link = editingCategory.getLinks().get(position);
 
-//        System.out.println(position + " " + shout.getContent());
+        System.out.println(position + " " + link.getName());
         if(position % 2 == 1)
         {
-            RelativeLayout bg = (RelativeLayout)convertView.findViewById(R.id.feedsLayoutBg);
+            RelativeLayout bg = (RelativeLayout)convertView.findViewById(R.id.layoutBg);
         	bg.setBackgroundColor(Color.parseColor("#F3F3F3"));
         }
 
-        View tempShoutViewObject = (TextView)convertView.findViewById(R.id.linkNameTxt);
-        ((TextView)tempShoutViewObject).setText(category.getName());
+        View tempLinkViewObject = (TextView)convertView.findViewById(R.id.linkNameTxt);
+        ((TextView)tempLinkViewObject).setText(link.getName());
 
-//        AppManager.fontTextView(nameLabel, 23);
-
-//        TriggerButtonUI ten = new TriggerButtonUI( (Button)convertView.findViewById(R.id.ten), activityName.addPurchase );
-//        ten.setId(position);
-//        TriggerButtonUI twenty = new TriggerButtonUI( (Button)convertView.findViewById(R.id.twenty), activityName.addPurchase);
-//        twenty.setId(position);
+        if(editingCategory.containsLink(link)){
+            tempLinkViewObject = (CheckBox)convertView.findViewById(R.id.checkBox);
+            ((CheckBox)tempLinkViewObject).setChecked(true);
+        }
         return convertView;
     }
 }

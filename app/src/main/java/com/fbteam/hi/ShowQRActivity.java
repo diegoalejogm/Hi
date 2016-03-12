@@ -7,11 +7,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.widget.ImageView;
+
+import com.fbteam.hi.models.Category;
+
 import net.glxn.qrgen.android.QRCode;
 
 
 public class ShowQRActivity extends AppCompatActivity
 {
+    private Category category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -21,6 +25,7 @@ public class ShowQRActivity extends AppCompatActivity
         display.getSize(size);
         int width = size.x;
         int height = size.y;
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_qr);

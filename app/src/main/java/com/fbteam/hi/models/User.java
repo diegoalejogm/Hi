@@ -33,14 +33,14 @@ public class User {
         Link link3 = new Link("github", "nshevchenko", false);
         Category c1 = new Category("Personal");
         c1.addLink(link1);
-        c1.addLink(link1);
+        c1.addLink(link2);
         Category c2 = new Category("Professional");
         c2.addLink(link2);
         c2.addLink(link3);
 
         links.add(link1);
-        links.add(link1);
-        links.add(link1);
+        links.add(link2);
+        links.add(link3);
 
         categories.add(c1);
         categories.add(c2);
