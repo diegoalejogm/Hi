@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.fbteam.hi.R;
+import com.fbteam.hi.helper.CaptureQRActivityAnyOrientation;
+import com.google.zxing.integration.android.IntentIntegrator;
 
 public class HomeActivity extends Activity implements View.OnClickListener  {
 
@@ -24,23 +26,17 @@ public class HomeActivity extends Activity implements View.OnClickListener  {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-//
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.setDrawerListener(toggle);
-//        toggle.syncState();
-//
-//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(this);
+        // Add friend button (FAB)
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.FAB_AddFriend);
+        fab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                new IntentIntegrator(HomeActivity.this).setCaptureActivity(CaptureQRActivityAnyOrientation.class).setBeepEnabled(true).setOrientationLocked(false).initiateScan();
+            }
+        });
     }
 
     @Override
