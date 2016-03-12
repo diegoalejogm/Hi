@@ -13,11 +13,32 @@ public class Link
     private int type;
 
 
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getContent()
+    {
+        return content;
+    }
+
+    public String getVerified()
+    {
+        return verified;
+    }
+
+    public int getType()
+    {
+        return type;
+    }
+
     public Link(String name, String content, String verified)
     {
         this.name = name;
         this.content = content;
         this.verified = verified;
+
     }
 
 }

@@ -1,6 +1,7 @@
 package com.fbteam.hi.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,8 +16,10 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.fbteam.hi.App;
 import com.fbteam.hi.R;
 import com.fbteam.hi.adapters.CategoryListAdapter;
+import com.fbteam.hi.ShowQRActivity;
 import com.fbteam.hi.helper.CaptureQRActivityAnyOrientation;
 import com.fbteam.hi.models.Category;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -45,8 +48,6 @@ public class HomeActivity extends Activity implements View.OnClickListener  {
         fab.setOnClickListener(this);
 
         /// set up list
-
-
         categoriesList = (ListView) findViewById(R.id.categoriesList);
         categoriesList.setAdapter(new CategoryListAdapter(this, R.layout.category_row));
         categoriesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

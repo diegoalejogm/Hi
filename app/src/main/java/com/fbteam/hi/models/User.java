@@ -28,4 +28,21 @@ public class User {
         this.links = new ArrayList<>();
         this.categories = new ArrayList<>();
     }
+
+    public ArrayList<Link> getLinks()
+    {
+        return links;
+    }
+
+    public ArrayList<Category> getCategories()
+    {
+        return categories;
+    }
+
+
+    public void restore()
+    {
+
+    }
+
 }
