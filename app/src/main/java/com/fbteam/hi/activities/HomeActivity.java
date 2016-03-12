@@ -12,12 +12,20 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.fbteam.hi.R;
+import com.fbteam.hi.adapters.CategoryListAdapter;
 import com.fbteam.hi.helper.CaptureQRActivityAnyOrientation;
+import com.fbteam.hi.models.Category;
 import com.google.zxing.integration.android.IntentIntegrator;
 
 public class HomeActivity extends Activity implements View.OnClickListener  {
+
+    // list view
+    private ListView categoriesList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +46,24 @@ public class HomeActivity extends Activity implements View.OnClickListener  {
 
         /// set up list
 
+
+        categoriesList = (ListView) findViewById(R.id.categoriesList);
+        categoriesList.setAdapter(new CategoryListAdapter(this, R.layout.category_row));
+        categoriesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Category clickedShout = (Category) adapterView.getItemAtPosition(i);
+                // create
+//                clickedShout.createQRCode();
+
+
+
+//                FragmentShoutDetail fragmentShoutDetail = new FragmentShoutDetail();
+//                fragmentShoutDetail.setShoutDetail(clickedShout);
+//
+//                fragmentShoutDetail.show(getFragmentManager(), "Shout detail");
+            }
+        });
 
     }
 
