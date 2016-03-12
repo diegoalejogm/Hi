@@ -76,16 +76,16 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
         }
 
         ImageView tempImageView = (ImageView) findViewById(R.id.nameImageView);
-        tempImageView.getDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+        tempImageView.getDrawable().setColorFilter(getResources().getColor(R.color.primary), PorterDuff.Mode.SRC_ATOP);
         tempImageView = (ImageView) findViewById(R.id.passwordImageView);
-        tempImageView.getDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+        tempImageView.getDrawable().setColorFilter(getResources().getColor(R.color.primary), PorterDuff.Mode.SRC_ATOP);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -152,7 +152,4 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
         startActivity(intent);
         finish();
     }
-}
-
-{
 }
