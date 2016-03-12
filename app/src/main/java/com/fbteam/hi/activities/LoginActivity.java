@@ -99,9 +99,11 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 try {
-                                    String name = object.getString("name");
+                                    String first_name = object.getString("first_name");
+                                    String last_name = object.getString("last_name");
                                     String email = object.getString("email");
                                     String link = object.getString("link");
+                                    
                                     openHomeActivity(Configuration.IMPORT_INFO_FROM_FACEBOOK);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -110,7 +112,7 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
                             }
                         });
                         Bundle parameters = new Bundle();
-                        parameters.putString("fields", "id, email, name, link");
+                        parameters.putString("fields", "id, email, first_name, last_name, link");
                         request.setParameters(parameters);
                         request.executeAsync();
                         System.out.println("LOGIN RESULT");

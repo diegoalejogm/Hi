@@ -56,6 +56,9 @@ public class User {
         return categories;
     }
 
+    public void addLinkNoCategory(Link newLink) {
+        this.links.add(newLink);
+    }
 
     public void persist(SharedPreferences preferences)
     {
