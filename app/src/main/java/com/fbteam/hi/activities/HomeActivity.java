@@ -70,11 +70,10 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
         int id = view.getId();
         switch(id){
             case R.id.FAB_AddFriend:
-                 new IntentIntegrator(HomeActivity.this)
-                         .setCaptureActivity(CaptureQRActivityAnyOrientation.class)
-                         .setBeepEnabled(true)
-                         .setOrientationLocked(false)
-                         .initiateScan();
+
+                Intent intent = new Intent(this, ShowQRActivity.class);
+                startActivity(intent);
+
                 break;
         }
     }
