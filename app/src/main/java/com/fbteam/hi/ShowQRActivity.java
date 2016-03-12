@@ -24,7 +24,7 @@ public class ShowQRActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_qr);
 
-        String codedString = "";
+        String codedString = "sdflafjhdkasfhaslñfadshfdasfjkladsbfadlskbvadsklccnilewaucnasdlcjasnuie";
 
         Bitmap myBitmap = QRCode.from(codedString).withSize(width, width).bitmap();
         ImageView myImage = (ImageView) findViewById(R.id.imageView);
