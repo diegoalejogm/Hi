@@ -2,6 +2,7 @@ package com.fbteam.hi;
 
 import android.graphics.Bitmap;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
@@ -28,6 +29,7 @@ public class ShowQRActivity extends AppCompatActivity
 
         Bitmap myBitmap = QRCode.from(codedString).withSize(width, width).bitmap();
         ImageView myImage = (ImageView) findViewById(R.id.imageView);
+        myImage.getDrawable().setColorFilter(getResources().getColor(R.color.primary), PorterDuff.Mode.SRC_ATOP);
         myImage.setImageBitmap(myBitmap);
     }
 }

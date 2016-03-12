@@ -28,20 +28,18 @@ public class HomeActivity extends Activity implements View.OnClickListener  {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
 
+        findElements();
+    }
+
+
+
+    private void findElements(){
         // Add friend button (FAB)
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.FAB_AddFriend);
-        fab.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                new IntentIntegrator(HomeActivity.this).setCaptureActivity(CaptureQRActivityAnyOrientation.class).setBeepEnabled(true).setOrientationLocked(false).initiateScan();
-                Intent intent = new Intent(HomeActivity.this, ShowQRActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        fab.setOnClickListener(this);
+
+        /// set up list
+
     }
 
     @Override
@@ -79,6 +77,15 @@ public class HomeActivity extends Activity implements View.OnClickListener  {
 
     @Override
     public void onClick(View view) {
-
+        int id = view.getId();
+        switch(id){
+            case R.id.FAB_AddFriend:
+                 new IntentIntegrator(HomeActivity.this)
+                         .setCaptureActivity(CaptureQRActivityAnyOrientation.class)
+                         .setBeepEnabled(true)
+                         .setOrientationLocked(false)
+                         .initiateScan();
+                break;
+        }
     }
 }
