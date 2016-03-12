@@ -2,6 +2,7 @@ package com.fbteam.hi.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -14,9 +15,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.facebook.FacebookSdk;
 
+import com.fbteam.hi.App;
 import com.fbteam.hi.Configuration;
 import com.fbteam.hi.R;
 
@@ -28,7 +31,6 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
 
 
     private int[] activity_buttons = {
-            R.id.offlineMode,
             R.id.importFromFb,
             R.id.importFromContact
     };
@@ -47,21 +49,15 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
      * Set initial data of the application
      */
     public void setInitialData(){
-        // read if user is here the first time ever
+        // read if user is here the first time ever or restore
 
+        SharedPreferences settings = getSharedPreferences(Configuration.DB_PREFERENCES, 0);
+        boolean registered = settings.getBoolean("registered", true);
 
+        if(registered){
+//            App.getMe().restore();
+        }
 
-        // Start to download user's data from API. Once complete callback to open the main Button
-
-//        RequestCallback apiCallback = new RequestCallback() {
-//            @Override
-//            public void onRequestComplete(String result) {
-//                System.out.println(result);
-//                ApiUtils.parseAppData(result);
-//                findViewById(R.id.doneButton).setVisibility(View.VISIBLE);
-//            }
-//        };
-//
 //        // download app data with the related callback
 //        ApiUtils.getRequestWithCallBack(Configurations.REMOTE_SERVER_URL, apiCallback);
     }
@@ -76,6 +72,9 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
             Button activity_button = (Button) this.findViewById(activity_buttons[i]);
             activity_button.setOnClickListener(this);
         }
+
+        TextView txt = (TextView) this.findViewById(R.id.offlineMode);
+        txt.setOnClickListener(this);
 
 //        ImageView tempImageView = (ImageView) findViewById(R.id.nameImageView);
 //        tempImageView.getDrawable().setColorFilter(getResources().getColor(R.color.primary), PorterDuff.Mode.SRC_ATOP);

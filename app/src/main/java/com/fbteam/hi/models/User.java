@@ -2,6 +2,7 @@ package com.fbteam.hi.models;
 
 import android.graphics.Bitmap;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -10,27 +11,22 @@ import java.util.Calendar;
 
 public class User {
 
-    private String name;
     // static objects
     private String id;
-    private String username;
-    private String password;
-    private String email;
-    private String nameAndSurname;
-    private String[] friendsIDs;
-    private String[] interests;
-    private Calendar createdDt;
 
-    // extra
-    private Bitmap imageProfile;
+    ArrayList<Link> links;
+    ArrayList<Category> categories;
 
-
-    public User(String id, String username, String email, String nameAndSurname, String password, String[] friendsIDs, String[] interests) {
+    public User(String id, ArrayList<Link> links, ArrayList<Category> categories) {
         this.id = id;
-        this.username = username;
-        this.email = email;
-        this.nameAndSurname = nameAndSurname;
-        this.password = password;
+        this.links = links;
+        this.categories = categories;
+    }
+
+    public User(String id) {
+        this.id = id;
+        this.links = new ArrayList<>();
+        this.categories = new ArrayList<>();
     }
 
 
