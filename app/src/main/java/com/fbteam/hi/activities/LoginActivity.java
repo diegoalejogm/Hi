@@ -3,7 +3,6 @@ package com.fbteam.hi.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.text.Editable;
@@ -15,11 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -28,12 +26,14 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.fbteam.hi.App;
+import com.fbteam.hi.models.App;
 import com.fbteam.hi.Configuration;
 import com.fbteam.hi.R;
+import com.fbteam.hi.models.User;
 
 
 import org.json.JSONException;
@@ -48,7 +48,10 @@ import java.util.Arrays;
 
 public class LoginActivity extends Activity implements View.OnClickListener  {
 
-    CallbackManager callbackManager;
+    private Profile userProfile;
+    private CallbackManager callbackManager;
+    private ProfileTracker profileTracker;
+    private AccessTokenTracker accessTokenTracker;
 
     private int[] activity_buttons = {
             R.id.importFromFb,
@@ -66,31 +69,48 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
         findActivityElements();
 
         callbackManager = CallbackManager.Factory.create();
+        profileTracker = new ProfileTracker() {
+            @Override
+            protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                setProfile(currentProfile);
+            }
+        };
+
+        accessTokenTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(
+                    AccessToken oldAccessToken,
+                    AccessToken currentAccessToken) {
+                // On AccessToken changes fetch the new profile which fires the event on
+                // the ProfileTracker if the profile is different
+                Profile.fetchProfileForCurrentAccessToken();
+            }
+        };
+
+        // Ensure that our profile is up to date
+        Profile.fetchProfileForCurrentAccessToken();
+        setProfile(Profile.getCurrentProfile());
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        GraphRequest request = GraphRequest.newMeRequest(
-                                loginResult.getAccessToken(),
-                                new GraphRequest.GraphJSONObjectCallback() {
-                                    @Override
-                                    public void onCompleted(JSONObject object, GraphResponse response) {
-                                        // Application code
-                                        String name = null;
-                                        String email = null;
-                                        String linkUri = null;
-                                        try {
-                                            name = object.getString("name");
-                                            email = object.getString("email");
-                                            linkUri = object.getString("linkUri");
-                                            openHomeActivity(Configuration.IMPORT_INFO_FROM_FACEBOOK);
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                });
+                        GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                try {
+                                    String name = object.getString("name");
+                                    String email = object.getString("email");
+                                    String link = object.getString("link");
+                                    openHomeActivity(Configuration.IMPORT_INFO_FROM_FACEBOOK);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        });
                         Bundle parameters = new Bundle();
-                        parameters.putString("fields", "id,name,email,gender,birthday,linkUri");
+                        parameters.putString("fields", "id, email, name, link");
                         request.setParameters(parameters);
                         request.executeAsync();
                         System.out.println("LOGIN RESULT");
@@ -112,11 +132,13 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
      */
     public void setInitialData(){
         // read if user is here the first time ever or restore
+        User me = new User();
 
+        App.setCurrentUser(me);
         SharedPreferences settings = getSharedPreferences(Configuration.DB_PREFERENCES, 0);
         boolean registered = settings.getBoolean("registered", true);
 
-        if(registered){
+        if (registered) {
 //            App.getMe().restore();
         }
 
@@ -138,7 +160,7 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
         TextView txt = (TextView) this.findViewById(R.id.offlineMode);
         txt.setOnClickListener(this);
         LoginButton loginButton = (LoginButton) this.findViewById(R.id.importFromFb);
-        loginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_birthday", "user_friends"));
+        loginButton.setReadPermissions(Arrays.asList("public_profile", "email"));
 //        ImageView tempImageView = (ImageView) findViewById(R.id.nameImageView);
 //        tempImageView.getDrawable().setColorFilter(getResources().getColor(R.color.primary), PorterDuff.Mode.SRC_ATOP);
 //        tempImageView = (ImageView) findViewById(R.id.passwordImageView);
@@ -204,6 +226,17 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
                 //faceboook create user
                 break;
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        profileTracker.stopTracking();
+        accessTokenTracker.startTracking();
+    }
+
+    private void setProfile(Profile newProfile) {
+        this.userProfile = newProfile;
     }
 
     /**
