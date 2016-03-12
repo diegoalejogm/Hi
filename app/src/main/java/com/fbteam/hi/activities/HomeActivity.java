@@ -76,7 +76,11 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
         int id = view.getId();
         switch(id){
             case R.id.FAB_AddFriend:
-                App.openActivity(this, ShowQRActivity.class);
+                new IntentIntegrator(this)
+                        .setCaptureActivity(CaptureQRActivityAnyOrientation.class)
+                        .setBeepEnabled(true)
+                        .setOrientationLocked(false)
+                        .initiateScan();
                 break;
         }
     }
@@ -102,6 +106,7 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
             {
                 App.getMe().addContactFromQRString(result.getContents());
                 Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
+                Log.v("TTTT", App.getMe().getContacts().get(0).toStringEncoding());
             }
             catch (Exception e)
             {

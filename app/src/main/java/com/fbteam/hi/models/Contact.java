@@ -29,10 +29,10 @@ public class Contact
     public String toStringEncoding()
     {
         StringBuffer sb = new StringBuffer();
-        sb.append(this.firstName+","+this.lastName);
+        sb.append(this.firstName+","+this.lastName+"&");
         for(Link link : this.links)
         {
-            sb.append(link.toStringEncoding(",")+",");
+            sb.append(link.toStringEncoding(",")+";");
         }
         sb.setLength(sb.length() - 1);
         return sb.toString();

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.widget.ImageView;
 
+import com.fbteam.hi.models.App;
 import com.fbteam.hi.models.Category;
 
 import net.glxn.qrgen.android.QRCode;
@@ -31,7 +32,8 @@ public class ShowQRActivity extends AppCompatActivity
         setContentView(R.layout.activity_show_qr);
         getSupportActionBar().hide();
 
-        String codedString = "This is a test string";
+        Category c = App.getMe().getCategories().get(0);
+        String codedString = App.getMe().toQRRepresentationWithCategory(c);
 
         Bitmap myBitmap = QRCode.from(codedString).withSize(width, width).bitmap();
         ImageView myImage = (ImageView) findViewById(R.id.imageView);

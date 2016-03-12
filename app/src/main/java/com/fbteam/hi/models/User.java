@@ -31,6 +31,10 @@ public class User {
         contacts = new ArrayList<>();
 
         //public Link(String name, String content, boolean verified)
+
+        // TESTING
+        this.firstName = "Mykola";
+        this.lastName= "Schevchenko";
         Link link1 = new Link("facebook", "niksheva", false);
         Link link2 = new Link("instagram", "niksheva", false);
         Link link3 = new Link("github", "nshevchenko", false);
@@ -155,6 +159,11 @@ public class User {
         return lastName;
     }
 
+    public ArrayList<Contact> getContacts()
+    {
+        return contacts;
+    }
+
     public Category findCategoryByName(String name)
     {
 
@@ -163,6 +172,7 @@ public class User {
             if(category.getName().equals(name)) return category;
         }
         return null;
+
     }
 
     public void addContactFromQRString(String contents)
