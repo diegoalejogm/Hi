@@ -38,6 +38,7 @@ public class Configuration {
         helper.put("spotify", "https://play.spotify.com/user/");
         helper.put("youtube", "https://youtube.com/channel/");
         helper.put("tumblr", "https://tumblr.com/blog/");
+        helper.put("medium", "https://medium.com/@");
         links = Collections.unmodifiableMap(helper);
     }
 
