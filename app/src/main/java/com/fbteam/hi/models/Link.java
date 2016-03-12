@@ -59,14 +59,14 @@ public class Link
         this.categories = new ArrayList<>();
     }
 
-    public String toPersistenceString()
+    public String toStringEncoding(String encoding)
     {
-        return name+","+content+","+verified;
+        return name+encoding+content+encoding+verified;
     }
 
-    public static Link fromString(String string)
+    public static Link fromStringEncoding(String string, String separator)
     {
-        String[] attributes = string.split(",");
+        String[] attributes = string.split(separator);
         return new Link(attributes[0],attributes[1], attributes[2]=="true"? true: false);
     }
 

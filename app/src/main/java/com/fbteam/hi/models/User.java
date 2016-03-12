@@ -13,19 +13,22 @@ import java.util.Calendar;
 
 public class User {
 
+    private static final String ATTRIBUTE_SEPARATOR = ",";
+
     // static objects
     private String id;
     private String firstName;
     private String lastName;
 
-
     ArrayList<Link> links;
     ArrayList<Category> categories;
+    ArrayList<Contact> contacts;
 
 
     public User(){
-        links = new ArrayList<Link>();
-        categories = new ArrayList<Category>();
+        links = new ArrayList<>();
+        categories = new ArrayList<>();
+        contacts = new ArrayList<>();
 
         //public Link(String name, String content, boolean verified)
         Link link1 = new Link("facebook", "niksheva", false);
@@ -62,35 +65,37 @@ public class User {
         int categoryCounter = 0;
         int linkCounter = 0;
 
-        preferences.edit().putString("user", this.toPersistenceString());
+        String separator = ",";
+
+        preferences.edit().putString("user", this.toStringEncoding(separator));
 
         for(Link link: this.links)
         {
-            preferences.edit().putString("link/"+linkCounter, link.toPersistenceString());
+            preferences.edit().putString("link/"+linkCounter, link.toStringEncoding(separator));
             StringBuffer categories = new StringBuffer();
             for(Category category : link.getCategories())
             {
-                categories.append(category.getId() + ",");
-
+                categories.append(category.getId() + separator);
             }
             categories.setLength(categories.length() - 1);
-            preferences.edit().putString("link/"+ (linkCounter++) +"/categories",categories.toString());
+            preferences.edit().putString("link/" + (linkCounter++) + "/categories", categories.toString());
         }
 
         for(Category category : this.categories)
         {
-            preferences.edit().putString("category/" + (categoryCounter++), category.toString());
+            preferences.edit().putString("category/" + (categoryCounter++), category.toStringEncoding(separator));
         }
     }
 
-    private String toPersistenceString()
+    private String toStringEncoding(String separator)
     {
-        return id + "," + firstName + "," + lastName;
+        return id + separator + firstName + separator + lastName;
     }
 
     private void updateFromString(String string)
     {
-        String[] userData = string.split(",");
+        String separator = this.ATTRIBUTE_SEPARATOR;
+        String[] userData = string.split(separator);
         this.id = userData[0];
         this.firstName = userData[1];
         this.lastName = userData[2];
@@ -98,7 +103,7 @@ public class User {
 
     public void restore(SharedPreferences preferences)
     {
-        String userValues = preferences.getString("user",null);
+        String userValues = preferences.getString("user", null);
 
         // TODO: Throw exception
         if(userValues == null) return;
@@ -109,7 +114,7 @@ public class User {
         int categoryCounter = 0;
         while( (categoryString =preferences.getString("category/"+ categoryCounter,null)) != null)
         {
-            Category newCategory = Category.fromString(categoryString);
+            Category newCategory = Category.fromStringEncoding(categoryString, this.ATTRIBUTE_SEPARATOR);
             this.categories.add(newCategory);
 
             categoryCounter++;
@@ -121,11 +126,11 @@ public class User {
         // Add Links
         while( (linkString =preferences.getString("link/"+linkCounter,null)) != null)
         {
-            Link newLink = Link.fromString(linkString);
+            Link newLink = Link.fromStringEncoding(linkString, this.ATTRIBUTE_SEPARATOR);
             this.links.add(newLink);
 
             String categoriesString = preferences.getString("link/"+linkCounter+"/categories","");
-            for(String categoryName : categoriesString.split(","))
+            for(String categoryName : categoriesString.split(this.ATTRIBUTE_SEPARATOR))
             {
                 Category c = findCategoryByName(categoryName);
                 if(c == null) continue;
@@ -135,8 +140,24 @@ public class User {
         }
     }
 
+    public String getId()
+    {
+        return id;
+    }
+
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    public String getLastName()
+    {
+        return lastName;
+    }
+
     public Category findCategoryByName(String name)
     {
+
         for(Category category : categories)
         {
             if(category.getName().equals(name)) return category;
@@ -144,4 +165,13 @@ public class User {
         return null;
     }
 
+    public void addContactFromQRString(String contents)
+    {
+        contacts.add(Contact.fromStringEncoding(contents));
+    }
+
+    public String toQRRepresentationWithCategory(Category c)
+    {
+        return Contact.fromUserAndCategory(this, c).toStringEncoding();
+    }
 }
