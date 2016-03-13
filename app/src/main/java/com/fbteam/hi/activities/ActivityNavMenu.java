@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
 import com.fbteam.hi.Configuration;
 
 import com.fbteam.hi.R;
@@ -98,6 +99,7 @@ public class ActivityNavMenu extends AppCompatActivity
             case R.id.nav_logout:
                 SharedPreferences settings = getSharedPreferences(Configuration.DB_PREFERENCES, 0);
                 settings.edit().putBoolean("registered", false).commit();
+                LoginManager.getInstance().logOut();
                 App.openActivity(this, LoginActivity.class);
                 finish();
                 break;

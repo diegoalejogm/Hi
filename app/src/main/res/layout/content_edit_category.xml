@@ -23,7 +23,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <EditText
-        android:layout_width="200dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="Hello World!"
         android:layout_marginLeft="20dp"

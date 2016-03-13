@@ -14,7 +14,7 @@
             android:src="@android:color/darker_gray"
             android:layout_centerVertical="true"
             android:layout_margin="5dp"
-            android:layout_marginLeft="5dp" />
+            android:layout_marginLeft="15dp" />
         <TextView
             android:layout_width="wrap_content"
 
@@ -36,7 +36,7 @@
             android:layout_alignParentRight="true"
             android:textSize="21sp"
             android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="15dp"
             android:textColor="@color/primary_dark"
             android:textAlignment="textEnd"
             android:text="nshevchenko"
