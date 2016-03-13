@@ -67,6 +67,9 @@ public class User {
     }
 
     public void addLinkNoCategory(Link newLink) {
+        for(Link tempL : links)
+            if(newLink.getName().equals(tempL.getName()))
+                return;
         this.links.add(newLink);
     }
 

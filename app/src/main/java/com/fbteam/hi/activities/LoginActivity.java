@@ -155,7 +155,7 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
         }
         else
         {
-            me.addTestData();
+//            me.addTestData();
         }
 
 //        // download app data with the related callback

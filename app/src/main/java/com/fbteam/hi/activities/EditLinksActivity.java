@@ -107,9 +107,12 @@ public class EditLinksActivity extends ActivityNavMenu implements View.OnClickLi
         View tempV = this.findViewById(R.id.user_name);
         try{
             String newName = ((EditText)tempV).getText().toString();
+            System.out.println("going " + newName);
             String[] names = newName.split(" ");
             App.getMe().setFirstName(names[0]);
             App.getMe().setLastName(names[1]);
+            System.out.println("going " + names.length);
+            System.out.println("going " + names[0]);
         } catch(NullPointerException e){
             System.out.println(e.getCause());
         }
@@ -151,20 +154,6 @@ public class EditLinksActivity extends ActivityNavMenu implements View.OnClickLi
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String strName = arrayAdapter.getItem(which);
-//                        AlertDialog.Builder builderInner = new AlertDialog.Builder(EditLinksActivity.this);
-//                        builderInner.setMessage(strName);
-//                        builderInner.setTitle("Your Selected Item is");
-//                        builderInner.setPositiveButton(
-//                                "Ok",
-//                                new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(
-//                                            DialogInterface dialog,
-//                                            int which) {
-//                                        dialog.dismiss();
-//                                    }
-//                                });
-//                        builderInner.show();
                         Link newL = new Link(strName, "", Configuration.TYPE_LINK_WEBSITE, false);
                         App.getMe().addLinkNoCategory(newL);
                         links.invalidateViews();
