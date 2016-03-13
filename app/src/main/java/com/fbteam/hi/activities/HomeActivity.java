@@ -105,13 +105,13 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
         });
 
         if (AccessToken.getCurrentAccessToken() != null) {
-            try {
+            /*try {
                 Bitmap mBitmap = getFacebookProfilePicture(AccessToken.getCurrentAccessToken().getToken());
                 ImageView imageView = (ImageView) this.findViewById(R.id.imageView);
                 imageView.setImageBitmap(mBitmap);
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
     }
 
