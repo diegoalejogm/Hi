@@ -3,6 +3,7 @@ package com.fbteam.hi.models;
 import android.content.SharedPreferences;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by nik on 12/03/16.
@@ -14,9 +15,8 @@ public class Contact
     private String id;
     private String firstName;
     private String lastName;
-
+    private Date added;
     ArrayList<Link> links;
-
 
     public Contact(String firstName, String lastName, ArrayList<Link> links)
     {
@@ -24,12 +24,13 @@ public class Contact
         this.firstName = firstName;
         this.lastName = lastName;
         this.links = links;
+        this.added = new Date();
     }
 
     public String toStringEncoding()
     {
         StringBuffer sb = new StringBuffer();
-        sb.append(this.firstName+","+this.lastName+"&");
+        sb.append(this.firstName + "," + this.lastName + "&");
         for(Link link : this.links)
         {
             sb.append(link.toStringEncoding(",")+";");
@@ -72,8 +73,37 @@ public class Contact
         return links;
     }
 
+    public Date getAdded() {
+        return this.added;
+    }
+
+    public void setAdded(Date added) {
+        this.added = added;
+    }
+
     public static Contact fromUserAndCategory(User user, Category category)
     {
         return new Contact(user.getFirstName(), user.getLastName(), category.getLinks());
+    }
+
+    public String getId()
+    {
+        return id;
+    }
+
+
+    public String getFullName()
+    {
+        return firstName + ((!lastName.equals(""))? " " + lastName:"");
+    }
+
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    public String getLastName()
+    {
+        return lastName;
     }
 }
