@@ -1,6 +1,7 @@
 package com.fbteam.hi.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -94,6 +95,13 @@ public class ActivityNavMenu extends AppCompatActivity
             case R.id.nav_history:
                 App.openActivity(this, HistoryActivity.class);
                 break;
+            case R.id.nav_logout:
+                SharedPreferences settings = getSharedPreferences(Configuration.DB_PREFERENCES, 0);
+                settings.edit().putBoolean("registered", false).commit();
+                App.openActivity(this, LoginActivity.class);
+                finish();
+                break;
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

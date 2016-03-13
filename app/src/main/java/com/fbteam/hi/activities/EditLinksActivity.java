@@ -47,7 +47,7 @@ public class EditLinksActivity extends ActivityNavMenu implements View.OnClickLi
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Edit Profile");
-        loadNavDrawer(toolbar);
+//        loadNavDrawer(toolbar);
         findElements();
     }
 

@@ -27,6 +27,8 @@ public class User {
 
 
     public User(){
+        firstName = "";
+        lastName = "";
         links = new ArrayList<>();
         categories = new ArrayList<>();
         contacts = new ArrayList<>();
