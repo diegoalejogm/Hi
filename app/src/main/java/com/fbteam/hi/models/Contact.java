@@ -3,6 +3,7 @@ package com.fbteam.hi.models;
 import android.content.SharedPreferences;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by nik on 12/03/16.
@@ -14,9 +15,8 @@ public class Contact
     private String id;
     private String firstName;
     private String lastName;
-
+    private Date added;
     ArrayList<Link> links;
-
 
     public Contact(String firstName, String lastName, ArrayList<Link> links)
     {
@@ -24,6 +24,7 @@ public class Contact
         this.firstName = firstName;
         this.lastName = lastName;
         this.links = links;
+        this.added = new Date();
     }
 
     public String toStringEncoding()
@@ -70,6 +71,14 @@ public class Contact
     public ArrayList<Link> getLinks()
     {
         return links;
+    }
+
+    public Date getAdded() {
+        return this.added;
+    }
+
+    public void setAdded(Date added) {
+        this.added = added;
     }
 
     public static Contact fromUserAndCategory(User user, Category category)

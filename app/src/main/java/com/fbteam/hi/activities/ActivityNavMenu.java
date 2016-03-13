@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import com.fbteam.hi.R;
 import com.fbteam.hi.helper.CaptureQRActivityAnyOrientation;
 import com.fbteam.hi.models.App;
+import com.fbteam.hi.models.Category;
 import com.google.zxing.integration.android.IntentIntegrator;
 
 /**
@@ -67,8 +68,10 @@ public class ActivityNavMenu extends AppCompatActivity
             case R.id.nav_edit_links:
                 App.openActivity(this, EditLinksActivity.class);
                 break;
-            case R.id.nav_edit_categories:
-                App.openActivity(this, EditCategoryActivity.class);
+            case R.id.nav_new_category:
+//                App.openActivity(this, EditCategoryActivity.class);
+                Category cat = new Category("New");
+
                 break;
         }
 

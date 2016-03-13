@@ -64,6 +64,9 @@ public class User {
         return categories;
     }
 
+    public void addLinkNoCategory(Link newLink) {
+        this.links.add(newLink);
+    }
 
     public void persist(SharedPreferences preferences)
     {
@@ -158,6 +161,14 @@ public class User {
     public String getLastName()
     {
         return lastName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public ArrayList<Contact> getContacts()

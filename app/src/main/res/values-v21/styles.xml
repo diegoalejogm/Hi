@@ -9,6 +9,10 @@
 
     <style name="EditTextTheme">
         <item name="colorControlNormal">@color/primary_dark</item>
+
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:clickable">true</item>
     </style>
 
 </resources>

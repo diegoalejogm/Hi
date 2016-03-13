@@ -3,14 +3,19 @@ package com.fbteam.hi.activities;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.fbteam.hi.Configuration;
 import com.fbteam.hi.R;
 import com.fbteam.hi.adapters.CategoryListAdapter;
 import com.fbteam.hi.adapters.EditCategoryListAdapter;
 import com.fbteam.hi.helper.CaptureQRActivityAnyOrientation;
+import com.fbteam.hi.models.App;
 import com.fbteam.hi.models.Category;
 import com.google.zxing.integration.android.IntentIntegrator;
 
@@ -27,36 +32,34 @@ public class EditCategoryActivity extends ActivityNavMenu implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_edit_category);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         loadNavDrawer(toolbar);
 
-//        editingCategoryId = 0;
-
+        // load editing category id
+        int categId = getIntent().getExtras().getInt(Configuration.CATEGORY_ID);
+//        int categId = Integer.parseInt(categIdStr);
+        editingCategory = App.getMe().getCategories().get(categId);
         findElements();
     }
 
 
     private void findElements(){
 
+        // set up title
+
+        TextView txt = (TextView)findViewById(R.id.category_title);
+        txt.setText(editingCategory.getName());
+
         /// set up list
+
         links = (ListView) findViewById(R.id.categoriesList);
-        links.setAdapter(new EditCategoryListAdapter(this, R.layout.category_row, editingCategory));
+        links.setAdapter(new EditCategoryListAdapter(this, R.layout.edit_category_row, editingCategory));
         links.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Category clickedShout = (Category) adapterView.getItemAtPosition(i);
-//                intent.putExtra("theDataIdentifier", yourData);
-//                clickedShout.
-                // create
-//                clickedShout.createQRCode();
-
-
-
-//                FragmentShoutDetail fragmentShoutDetail = new FragmentShoutDetail();
-//                fragmentShoutDetail.setShoutDetail(clickedShout);
-//
-//                fragmentShoutDetail.show(getFragmentManager(), "Shout detail");
+                Category clickedCateg = (Category) adapterView.getItemAtPosition(i);
+//                clickedCateg.
             }
         });
 
@@ -70,6 +73,28 @@ public class EditCategoryActivity extends ActivityNavMenu implements View.OnClic
 
                 break;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.editing, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_menu_done) {
+            //save user
+            //TODO: save category here
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

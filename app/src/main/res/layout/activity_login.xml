@@ -60,7 +60,7 @@
             android:textAlignment="center"
             android:layout_centerHorizontal="true" />
 
-        <Button
+        <com.facebook.login.widget.LoginButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Facebook"
@@ -69,7 +69,7 @@
             android:textColor="@color/accent"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:visibility="visible"
             android:background="@drawable/round_corners_button"
             android:textSize="15sp"
