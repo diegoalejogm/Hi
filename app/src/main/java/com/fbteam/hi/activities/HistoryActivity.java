@@ -1,6 +1,11 @@
 package com.fbteam.hi.activities;
 
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -16,10 +21,10 @@ import com.fbteam.hi.models.Contact;
 /**
  * Created by leticiawanderley on 13/03/2016.
  */
-public class HistoryActivity extends ActivityNavMenu implements View.OnClickListener  {
+public class HistoryActivity extends ActivityNavMenu {
 
     ListView contactsList;
-
+    private final int PICK_CONTACT = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,16 +41,17 @@ public class HistoryActivity extends ActivityNavMenu implements View.OnClickList
         contactsList.setAdapter(new ContactListAdapter(this, R.layout.contact_row));
         contactsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                System.out.println("on item click" + i + " " + l + " " + view.getId());
                 Contact contact = (Contact) adapterView.getItemAtPosition(i);
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT, Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_LOOKUP_URI, contact.getFullName()));
+                intent.setType(ContactsContract.Contacts.CONTENT_ITEM_TYPE);
+                startActivityForResult(intent, PICK_CONTACT);
             }
         });
     }
-
     @Override
-    public void onClick(View v) {
-
+    public void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
     }
+
 }

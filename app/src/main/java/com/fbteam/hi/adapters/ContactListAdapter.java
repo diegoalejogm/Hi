@@ -36,7 +36,7 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
         Contact contact = App.getMe().getContacts().get(position);
 
         View tempShoutViewObject = (TextView)convertView.findViewById(R.id.contactNameTxt);
-        ((TextView)tempShoutViewObject).setText(contact.getName());
+        ((TextView)tempShoutViewObject).setText(contact.getFullName());
 
         return convertView;
     }

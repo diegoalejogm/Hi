@@ -79,7 +79,6 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
         });
     }
 
-
     private void processLongClickOnCategory(int id){
         System.out.println("category pro-clicked " + id);
         Intent intent = new Intent(this, EditCategoryActivity.class);
@@ -108,7 +107,6 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
         }
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -126,15 +124,11 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
         {
             Contact c = App.getMe().addContactFromQRString(result.getContents());
             Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
-            Log.v("TTTT", App.getMe().getContacts().get(0).toStringEncoding());
+            //Log.v("TTTT", App.getMe().getContacts().get(0).toStringEncoding());
 
             AddressBookManager.createContact(c, this);
-
-
         }
 
         super.onActivityResult(requestCode, resultCode, data);
     }
-
-
 }
