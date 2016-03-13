@@ -41,7 +41,7 @@ public class EditCategoryActivity extends ActivityNavMenu implements View.OnClic
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Edit Category");
-        loadNavDrawer(toolbar);
+//        loadNavDrawer(toolbar);
         // load editing category id
         int categId = getIntent().getExtras().getInt(Configuration.CATEGORY_ID);
 //        int categId = Integer.parseInt(categIdStr);
