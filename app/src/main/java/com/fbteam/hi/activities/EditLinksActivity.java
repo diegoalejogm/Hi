@@ -24,6 +24,8 @@ import com.fbteam.hi.models.App;
 import com.fbteam.hi.models.Category;
 import com.fbteam.hi.models.Link;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
@@ -56,7 +58,8 @@ public class EditLinksActivity extends ActivityNavMenu implements View.OnClickLi
         links.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
         links.setAdapter(new EditLinksAdapter(this, R.layout.edit_link_row));
 
-
+        View tempV = this.findViewById(R.id.user_name);
+        ((EditText)tempV).setText(App.getMe().getFirstName() + " " + App.getMe().getLastName());
         // Add friend button (FAB)
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_new_link);
         fab.setOnClickListener(this);
