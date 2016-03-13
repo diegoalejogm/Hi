@@ -31,6 +31,8 @@ public class User {
         lastName = "";
         links = new ArrayList<>();
         categories = new ArrayList<>();
+        categories.add(new Category("Friends"));
+        categories.add(new Category("Professional"));
         contacts = new ArrayList<>();
         //public Link(String name, String content, boolean verified)
     }
@@ -117,12 +119,15 @@ public class User {
         String separator = this.ATTRIBUTE_SEPARATOR;
         String[] userData = string.split(separator);
         this.id = userData[0];
-        this.firstName = userData[1];
-        this.lastName = userData[2];
+        if(userData.length >= 2) this.firstName = userData[1];
+        if(userData.length >= 3) this.lastName = userData[2];
+
     }
 
     public void restore(SharedPreferences preferences)
     {
+        this.categories = new ArrayList<>();
+        this.links = new ArrayList<>();
         String userValues = preferences.getString("user", null);
 
         // TODO: Throw exception

@@ -3,6 +3,7 @@ package com.fbteam.hi.activities;
 import android.app.Activity;
 import android.content.*;
 import android.database.Cursor;
+import android.net.Uri;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Toast;
@@ -93,7 +94,7 @@ public class AddressBookManager
 
     }
 
-    public static void createContact(Contact c, Activity activity)
+    public static void createContact(Contact c, Activity activity, int code)
     {
         ArrayList < ContentValues > data = new ArrayList<>();
 
@@ -130,9 +131,18 @@ public class AddressBookManager
             data.add(cv);
         }
 
+        intent.putExtra("finishActivityOnSaveCompleted", true);
         intent.putParcelableArrayListExtra(Intents.Insert.DATA, data);
 
-        activity.startActivity(intent);
+        activity.startActivityForResult(intent, code);
     }
 
+    public static void openContact(Context context, Contact c)
+    {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_URI, String.valueOf(c.getId()));
+        intent.setData(uri);
+        context.startActivity(intent);
+    }
 }

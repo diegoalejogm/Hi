@@ -39,13 +39,17 @@ public class HistoryActivity extends ActivityNavMenu {
         /// set up list
         contactsList = (ListView) findViewById(R.id.contactsList);
         contactsList.setAdapter(new ContactListAdapter(this, R.layout.contact_row));
-        contactsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        contactsList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
                 Contact contact = (Contact) adapterView.getItemAtPosition(i);
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT, Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_LOOKUP_URI, contact.getFullName()));
-                intent.setType(ContactsContract.Contacts.CONTENT_ITEM_TYPE);
-                startActivityForResult(intent, PICK_CONTACT);
+                AddressBookManager.openContact(HistoryActivity.this.getApplicationContext(), contact);
+
+//                Intent intent = new Intent(Intent.ACTION_GET_CONTENT, Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_LOOKUP_URI, contact.getId()));
+//                intent.setType(ContactsContract.Contacts.CONTENT_ITEM_TYPE);
+//                startActivityForResult(intent, PICK_CONTACT);
             }
         });
     }
@@ -53,5 +57,7 @@ public class HistoryActivity extends ActivityNavMenu {
     public void onActivityResult(int reqCode, int resultCode, Intent data) {
         super.onActivityResult(reqCode, resultCode, data);
     }
+
+
 
 }

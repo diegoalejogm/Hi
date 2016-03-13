@@ -106,4 +106,9 @@ public class Contact
     {
         return lastName;
     }
+
+    public void setId(String id)
+    {
+        this.id = id;
+    }
 }

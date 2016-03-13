@@ -3,6 +3,7 @@ package com.fbteam.hi.activities;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -45,7 +46,7 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        loadNavDrawer(toolbar);
+         loadNavDrawer(toolbar);
         findElements();
     }
 
@@ -134,8 +135,22 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
     {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == 1111 && resultCode == Activity.RESULT_OK)
+        {
+            Uri contactData = data.getData();
+            Cursor c =  managedQuery(contactData, null, null, null, null);
 
-        if(resultCode == Activity.RESULT_CANCELED) return;
+            if (c.moveToFirst())
+            {
+                String id = c.getString(c.getColumnIndex(ContactsContract.Contacts._ID));
+                Log.d(this.getClass().getName(), "Selected " + id);
+                Contact contact = App.getMe().getContacts().get(App.getMe().getContacts().size()-1);
+                contact.setId(id);
+                AddressBookManager.openContact(this.getApplicationContext(), contact);
+            }
+        }
+
+        else if(resultCode == Activity.RESULT_CANCELED) return;
         // QR Code Scan Cancelled
         else if(result.getContents() == null) {
             Log.d("MainActivity", "Cancelled scan");
@@ -148,8 +163,9 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
             Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
             //Log.v("TTTT", App.getMe().getContacts().get(0).toStringEncoding());
 
-            AddressBookManager.createContact(c, this);
+            AddressBookManager.createContact(c, this, 1111);
         }
+
 
         super.onActivityResult(requestCode, resultCode, data);
     }
