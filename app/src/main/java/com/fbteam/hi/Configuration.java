@@ -33,7 +33,7 @@ public class Configuration {
         helper.put("Linkedin", "https://linkedin.com/in/");
         helper.put("Twitter", "https://twitter.com/");
         helper.put("Snapchat", "https://snapchat.com/add/");
-        helper.put("Google+", "https://plus.google.com/");
+        helper.put("Google", "https://plus.google.com/");
         helper.put("Pinterest", "https://pinterest.com/");
         helper.put("Spotify", "https://play.spotify.com/user/");
         helper.put("Youtube", "https://youtube.com/channel/");
@@ -55,7 +55,7 @@ public class Configuration {
         helper.put("Linkedin", R.mipmap.linkedin);
         helper.put("Twitter",R.mipmap.twitter);
         helper.put("Snapchat", R.mipmap.snapchat);
-        helper.put("Google+", R.mipmap.google);
+        helper.put("Google",  R.mipmap.google);
         helper.put("Pinterest", R.mipmap.pinterest);
         helper.put("Spotify", R.mipmap.spotify);
         helper.put("Youtube", R.mipmap.youtube);

@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -18,8 +22,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.facebook.AccessToken;
+import com.facebook.FacebookSdk;
 import com.fbteam.hi.Configuration;
 import android.widget.Toast;
 import com.fbteam.hi.R;
@@ -33,7 +40,9 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 public class HomeActivity extends ActivityNavMenu implements View.OnClickListener  {
 
@@ -43,12 +52,22 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
          loadNavDrawer(toolbar);
         findElements();
     }
+
+    public static Bitmap getFacebookProfilePicture(String userID) throws IOException {
+        URL imageURL = new URL("https://graph.facebook.com/" + userID + "/picture?type=large");
+        Bitmap bitmap = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
+
+        return bitmap;
+    }
+
+    // on createView method
 
     @Override
     public void onResume() {
@@ -57,7 +76,7 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
     }
 
 
-    private void findElements(){
+    private void findElements() {
         // Add friend button (FAB)
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_new_category);
         fab.setOnClickListener(this);
@@ -87,6 +106,16 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
                 return true;
             }
         });
+
+        if (AccessToken.getCurrentAccessToken() != null) {
+            /*try {
+                Bitmap mBitmap = getFacebookProfilePicture(AccessToken.getCurrentAccessToken().getToken());
+                ImageView imageView = (ImageView) this.findViewById(R.id.imageView);
+                imageView.setImageBitmap(mBitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }*/
+        }
     }
 
     private void processLongClickOnCategory(int id){
@@ -131,8 +160,7 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1111 && resultCode == Activity.RESULT_OK)
