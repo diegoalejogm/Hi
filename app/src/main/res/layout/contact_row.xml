@@ -33,6 +33,5 @@
                 android:text="Contact 1"
                 android:textColor="@color/secondary_text"
                 android:layout_centerInParent="true" />
-
     </RelativeLayout>
 </RelativeLayout>

@@ -7,13 +7,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.fbteam.hi.Configuration;
 import com.fbteam.hi.R;
 import com.fbteam.hi.models.App;
 import com.fbteam.hi.models.Category;
 import com.fbteam.hi.models.Link;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nik on 12/03/16.
@@ -56,6 +61,15 @@ public class EditCategoryListAdapter extends ArrayAdapter<Link> {
             tempLinkViewObject = (CheckBox)convertView.findViewById(R.id.checkBox);
             ((CheckBox)tempLinkViewObject).setChecked(true);
         }
+
+        // image setting
+
+        List keys = new ArrayList(Configuration.links.keySet());
+        int id = Configuration.linksPics.get(link.getName());
+
+        tempLinkViewObject = (ImageView)convertView.findViewById(R.id.linkImage);
+        ((ImageView)tempLinkViewObject).setImageResource(id);
+
         return convertView;
     }
 }

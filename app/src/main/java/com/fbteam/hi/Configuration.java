@@ -39,6 +39,9 @@ public class Configuration {
         helper.put("Youtube", "https://youtube.com/channel/");
         helper.put("Tumblr", "https://tumblr.com/blog/");
         helper.put("Medium", "https://medium.com/@");
+        helper.put("Phone",  "");
+        helper.put("Email",  "");
+
         links = Collections.unmodifiableMap(helper);
     }
 
@@ -58,6 +61,8 @@ public class Configuration {
         helper.put("Youtube", R.mipmap.youtube);
         helper.put("Tumblr",  R.mipmap.tumblr);
         helper.put("Medium",  R.mipmap.medium);
+        helper.put("Phone",  R.mipmap.phone);
+        helper.put("Email",  R.mipmap.email);
         linksPics = Collections.unmodifiableMap(helper);
     }
 }

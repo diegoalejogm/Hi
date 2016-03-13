@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -237,8 +238,11 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
     public void importInformationFrom(int source){
         switch(source){
             case Configuration.IMPORT_INFO_FROM_ADDRESSBOOK:
-                //contact create user
-
+                String name = AddressBookManager.findAndroidUserName(this);
+                String[] names = name.split(" ");
+                App.getMe().setFirstName(names[0]);
+                if(names.length >=2) App.getMe().setLastName(names[1]);
+                openHomeActivity(Configuration.OFFLINE_MODE_APP);
                 break;
             case Configuration.IMPORT_INFO_FROM_FACEBOOK:
                 //faceboook create user

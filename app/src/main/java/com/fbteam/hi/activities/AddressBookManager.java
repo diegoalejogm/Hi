@@ -2,6 +2,7 @@ package com.fbteam.hi.activities;
 
 import android.app.Activity;
 import android.content.*;
+import android.database.Cursor;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Toast;
@@ -69,7 +70,28 @@ public class AddressBookManager
         }
     }
 
+    public static String findAndroidUserName(Activity a)
+    {
+        Cursor c = a.getApplication().getContentResolver().query(ContactsContract.Profile.CONTENT_URI, null, null, null, null);
+        c.moveToFirst();
+        try
+        {
+            String msj = c.getString(c.getColumnIndex("display_name"));
+            return msj;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
+        finally
+        {
+            c.close();
+        }
 
+
+
+    }
 
     public static void createContact(Contact c, Activity activity)
     {
