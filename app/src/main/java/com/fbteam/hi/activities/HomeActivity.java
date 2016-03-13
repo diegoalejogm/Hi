@@ -88,7 +88,12 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
         });
     }
 
-
+    private void processLongClickOnCategory(int id){
+        System.out.println("category pro-clicked " + id);
+        Intent intent = new Intent(this, EditCategoryActivity.class);
+        intent.putExtra(Configuration.CATEGORY_ID, id);
+        startActivityForResult(intent, 9090);
+    }
 
     private void showQR(Category category){
 
@@ -141,15 +146,11 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
         {
             Contact c = App.getMe().addContactFromQRString(result.getContents());
             Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
-            Log.v("TTTT", App.getMe().getContacts().get(0).toStringEncoding());
+            //Log.v("TTTT", App.getMe().getContacts().get(0).toStringEncoding());
 
             AddressBookManager.createContact(c, this);
-
-
         }
 
         super.onActivityResult(requestCode, resultCode, data);
     }
-
-
 }

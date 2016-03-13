@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -36,11 +37,16 @@ public class DialogSelectListAdapter extends ArrayAdapter<String> {
     public View getView ( int position, View convertView, ViewGroup parent )
     {
         convertView = (RelativeLayout) inflater.inflate( resource, null );
+
+        // image setting
         List keys = new ArrayList(Configuration.links.keySet());
-        String key = keys.get(position).toString();
-        //android.R.mipmap.
-        int id = context.getResources().getIdentifier(key+".png", "drawable", context.getPackageName());
-//        imageView.setImageResource(id);
+        int id = Configuration.linksPics.get(keys.get(position));
+        System.out.println("id " + id + " " + keys.get(position));
+
+
+        View tempLinkViewObject = (ImageView)convertView.findViewById(R.id.linkImage);
+        ((ImageView)tempLinkViewObject).setImageResource(id);
+
         //Configuration.links
         View tempShoutViewObject = (TextView)convertView.findViewById(R.id.linkTypeNameTxt);
         ((TextView)tempShoutViewObject).setText(keys.get(position).toString());

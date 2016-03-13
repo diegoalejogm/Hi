@@ -38,7 +38,7 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
         Contact contact = App.getMe().getContacts().get(position);
 
         TextView tempShoutViewObject = (TextView)convertView.findViewById(R.id.contactNameTxt);
-        tempShoutViewObject.setText(contact.getName());
+        tempShoutViewObject.setText(contact.getFullName());
 
         tempShoutViewObject = (TextView)convertView.findViewById(R.id.contactDetailsTxt);
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");

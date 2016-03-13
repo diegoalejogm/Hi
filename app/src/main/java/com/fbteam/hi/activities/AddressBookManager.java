@@ -114,7 +114,13 @@ public class AddressBookManager
             else if(l.getType() == Configuration.TYPE_LINK_WEBSITE)
             {
                 cv.put(Data.MIMETYPE, CommonDataKinds.Website.CONTENT_ITEM_TYPE);
-                cv.put(CommonDataKinds.Website.URL, l.getContent());
+                String linkWebsite = l.getContent();
+                if (Configuration.links.containsKey(l.getName())) {
+                    StringBuilder stringBuilder = new StringBuilder(linkWebsite);
+                    stringBuilder.insert(0, Configuration.links.get(l.getName()));
+                    linkWebsite = stringBuilder.toString();
+                }
+                cv.put(CommonDataKinds.Website.URL, linkWebsite);
             }
             else if(l.getType() == Configuration.TYPE_LINK_EMAIL)
             {

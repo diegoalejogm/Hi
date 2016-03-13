@@ -60,9 +60,7 @@ public class EditLinksAdapter extends ArrayAdapter<Link>{
 
         // image setting
         List keys = new ArrayList(Configuration.links.keySet());
-//        String key = keys.get(position).toString();
         int id = Configuration.linksPics.get(link.getName());
-//        System.out.println("SHIT  " + key+".png ... " + id);
 
         tempLinkViewObject = (ImageView)convertView.findViewById(R.id.linkImage);
         ((ImageView)tempLinkViewObject).setImageResource(id);

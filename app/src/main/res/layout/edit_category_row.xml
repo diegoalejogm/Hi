@@ -12,6 +12,16 @@
         android:layout_width="fill_parent"
         android:layout_height="100px">
 
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/linkImage"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@android:color/darker_gray"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentRight="false" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,8 +32,9 @@
             android:textSize="20sp"
             android:textColor="@color/secondary_text"
             android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="30dp" />
+            android:layout_alignParentLeft="false"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/linkImage" />
 
         <CheckBox
             android:layout_width="40dp"
