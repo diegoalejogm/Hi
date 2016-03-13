@@ -41,4 +41,23 @@ public class Configuration {
         helper.put("medium", "https://medium.com/@");
         links = Collections.unmodifiableMap(helper);
     }
+
+
+    public static final Map<String, Integer> linksPics;
+    static {
+        Map<String, Integer> helper = new HashMap<String, Integer>();
+        helper.put("facebook", R.mipmap.fb);
+        helper.put("instagram",R.mipmap.instagram);
+        helper.put("github", R.mipmap.github);
+        helper.put("linkedin", R.mipmap.linkedin);
+        helper.put("twitter",R.mipmap.twitter);
+        helper.put("snapchat", R.mipmap.snapchat);
+        helper.put("google",  R.mipmap.google);
+        helper.put("pinterest", R.mipmap.pinterest);
+        helper.put("spotify", R.mipmap.spotify);
+        helper.put("youtube", R.mipmap.youtube);
+        helper.put("tumblr",  R.mipmap.tumblr);
+        helper.put("medium",  R.mipmap.medium);
+        linksPics = Collections.unmodifiableMap(helper);
+    }
 }
