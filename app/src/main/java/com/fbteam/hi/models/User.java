@@ -208,4 +208,18 @@ public class User {
     {
         return Contact.fromUserAndCategory(this, c).toStringEncoding();
     }
+
+    public String getFullName()
+    {
+        return firstName + ((!lastName.equals(""))? " " + lastName:"");
+    }
+
+    public Link getFirstEmail()
+    {
+        for (Link l : this.links)
+        {
+            if(l.getType() == Configuration.TYPE_LINK_EMAIL) return l;
+        }
+        return null;
+    }
 }

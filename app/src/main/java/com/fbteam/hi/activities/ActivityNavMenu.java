@@ -10,11 +10,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.View;
+import android.widget.TextView;
+
 import com.fbteam.hi.Configuration;
+
 import com.fbteam.hi.R;
 import com.fbteam.hi.helper.CaptureQRActivityAnyOrientation;
 import com.fbteam.hi.models.App;
 import com.fbteam.hi.models.Category;
+import com.fbteam.hi.models.Link;
 import com.google.zxing.integration.android.IntentIntegrator;
 
 /**
@@ -32,7 +37,17 @@ public class ActivityNavMenu extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView tv = (TextView) headerView.findViewById(R.id.userNameTextView);
+        tv.setText(App.getMe().getFullName());
+
+        tv = (TextView) headerView.findViewById(R.id.emailTextView);
+        Link email = App.getMe().getFirstEmail();
+        if(email != null) tv.setText(email.getContent());
+
+
         navigationView.setNavigationItemSelectedListener(this);
     }
 
