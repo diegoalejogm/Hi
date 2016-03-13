@@ -12,6 +12,7 @@
     tools:context=".activities.HomeActivity"
     tools:showIn="@layout/app_bar_home">
 
+
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

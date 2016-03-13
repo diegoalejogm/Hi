@@ -1,12 +1,15 @@
 package com.fbteam.hi.activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ import com.fbteam.hi.adapters.EditCategoryListAdapter;
 import com.fbteam.hi.helper.CaptureQRActivityAnyOrientation;
 import com.fbteam.hi.models.App;
 import com.fbteam.hi.models.Category;
+import com.fbteam.hi.models.Link;
 import com.google.zxing.integration.android.IntentIntegrator;
 
 /**
@@ -34,8 +38,9 @@ public class EditCategoryActivity extends ActivityNavMenu implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_category);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Edit Category");
         loadNavDrawer(toolbar);
-
         // load editing category id
         int categId = getIntent().getExtras().getInt(Configuration.CATEGORY_ID);
 //        int categId = Integer.parseInt(categIdStr);
@@ -58,8 +63,16 @@ public class EditCategoryActivity extends ActivityNavMenu implements View.OnClic
         links.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Category clickedCateg = (Category) adapterView.getItemAtPosition(i);
-//                clickedCateg.
+                Link tempL = editingCategory.getLinks().get(i);
+                CheckBox cb = (CheckBox)view.findViewById(R.id.checkBox);
+                System.out.println("pressing");
+                if(editingCategory.isLinkInCategory(tempL)) {
+                    editingCategory.removeLink(tempL);
+                    cb.setChecked(false);
+                }else{
+                    editingCategory.addLink(tempL);
+                    cb.setChecked(true);
+                }
             }
         });
 
@@ -91,7 +104,9 @@ public class EditCategoryActivity extends ActivityNavMenu implements View.OnClic
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_menu_done) {
             //save user
-            //TODO: save category here
+            System.out.println("saved user and exit");
+            App.getMe().persist(getSharedPreferences(Configuration.DB_PREFERENCES, Context.MODE_PRIVATE));
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

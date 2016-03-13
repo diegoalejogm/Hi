@@ -1,9 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/layoutBg"
-    android:weightSum="1.0">
+    android:id="@+id/layoutBg">
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -16,24 +14,22 @@
             android:id="@+id/linkNameTxt"
             android:layout_gravity="left"
             android:layout_marginTop="10dp"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textColor="@color/accent"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="10dp" />
 
         <EditText
-            android:layout_width="150dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:id="@+id/editContent"
             android:layout_alignParentRight="true"
             android:textSize="20sp"
-            android:hint="username"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:textColor="@color/primary_dark"
             android:textAlignment="center"
-            android:text="nshevchenko"
-            android:theme="@style/EditTextTheme" />
+            android:text="nshevchenko" />
     </RelativeLayout>
 </RelativeLayout>

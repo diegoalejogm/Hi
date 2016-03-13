@@ -23,12 +23,22 @@ public class Category
         links = new ArrayList<>();
     }
 
-    public static Category fromStringEncoding(String string, String separator)
+
+    public String getId()
     {
-        //public Link(String name, String content, boolean verified)
-        String[] attribute = string.split(separator);
-        return new Category(attribute[0]);
+        return id;
     }
+
+    public String getName() {
+
+        return name;
+    }
+
+    public ArrayList<Link> getLinks()
+    {
+        return links;
+    }
+
 
     public void addLink(Link link)
     {
@@ -36,36 +46,26 @@ public class Category
         link.addCategory(this);
     }
 
-    public String getId()
+    public void removeLink(Link link)
     {
-        return id;
-    }
-
-    public String getName()
-    {
-
-        return name;
-    }
-
-    public String toStringEncoding(String separator)
-    {
-        StringBuffer sb = new StringBuffer(name);
-        for(Link link : this.links)
-        {
-            sb.append(link.getId()+separator);
-        }
-        sb.setLength(sb.length() - 1);
-        return sb.toString();
+        Link remove = null;
+        for(Link tempL : links)
+            if(tempL.getName().equals(link.getName()))
+                remove = tempL;
+        links.remove(remove);
+        link.removeFromCategory(this);
     }
 
 
-    public ArrayList<Link> getLinks()
-    {
-        return links;
-    }
 
-    public Link getLinkByID(int id){
-        return links.get(id);
+    // UTILS
+
+
+    public static Category fromStringEncoding(String string, String separator)
+    {
+        //public Link(String name, String content, boolean verified)
+        String[] attribute = string.split(separator);
+        return new Category(attribute[0]);
     }
 
 
@@ -73,6 +73,28 @@ public class Category
         for (Link tempL : links)
             if(tempL.getName().equals(link.getName()))
                 return true;
+        return false;
+    }
+
+
+    public Link getLinkByID(int id){
+        return links.get(id);
+    }
+
+    public String toStringEncoding(String separator) {
+        StringBuffer sb = new StringBuffer(name);
+        for (Link link : this.links) {
+            sb.append(link.getId() + separator);
+        }
+        sb.setLength(sb.length() - 1);
+        return sb.toString();
+    }
+
+    public boolean isLinkInCategory(Link link){
+        for (Link tempL : this.links) {
+            if(tempL.getName().equals(link.getName()))
+                return true;
+        }
         return false;
     }
 }
