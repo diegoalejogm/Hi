@@ -32,7 +32,10 @@ public class User {
         contacts = new ArrayList<>();
 
         //public Link(String name, String content, boolean verified)
+    }
 
+    public void addTestData()
+    {
         // TESTING
         this.firstName = "Mykola";
         this.lastName= "Schevchenko";
@@ -80,7 +83,7 @@ public class User {
 
         for(Link link: this.links)
         {
-            editor.putString("link/"+linkCounter, link.toStringEncoding(separator));
+            editor.putString("link/" + linkCounter, link.toStringEncoding(separator));
             StringBuffer categories = new StringBuffer();
             for(Category category : link.getCategories())
             {
@@ -95,6 +98,8 @@ public class User {
         {
             editor.putString("category/" + (categoryCounter++), category.toStringEncoding(separator));
         }
+
+        editor.putBoolean("registered", true);
         editor.commit();
     }
 
