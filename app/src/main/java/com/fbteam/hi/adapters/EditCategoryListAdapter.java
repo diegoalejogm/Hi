@@ -63,6 +63,7 @@ public class EditCategoryListAdapter extends ArrayAdapter<Link> {
         }
 
         // image setting
+
         List keys = new ArrayList(Configuration.links.keySet());
         int id = Configuration.linksPics.get(link.getName());
 
