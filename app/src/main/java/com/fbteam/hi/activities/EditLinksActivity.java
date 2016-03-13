@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -41,6 +42,7 @@ public class EditLinksActivity extends ActivityNavMenu implements View.OnClickLi
 
         /// set up list
         links = (ListView) findViewById(R.id.categoriesList);
+        links.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
         links.setAdapter(new EditLinksAdapter(this, R.layout.edit_link_row));
         links.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
