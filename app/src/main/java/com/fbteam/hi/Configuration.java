@@ -18,6 +18,6 @@ public class Configuration {
 
     public static final int TYPE_LINK_PHONE = 0;
     public static final int TYPE_LINK_WEBSITE =  1;
-    public static final int TYPE_LINK_NAME =  2;
+    public static final int TYPE_LINK_EMAIL =  2;
 
 }

@@ -1,8 +1,13 @@
 package com.fbteam.hi.activities;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.provider.ContactsContract.Data;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -22,6 +27,7 @@ import com.fbteam.hi.adapters.CategoryListAdapter;
 import com.fbteam.hi.helper.CaptureQRActivityAnyOrientation;
 import com.fbteam.hi.models.App;
 import com.fbteam.hi.models.Category;
+import com.fbteam.hi.models.Contact;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -56,14 +62,14 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
         {
             @Override
 
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
                 Category category = (Category) adapterView.getItemAtPosition(i);
                 // create
                 showQR(category);
             }
         });
     }
-
 
     public void showQR(Category category){
         Intent intent = new Intent(this, ShowQRActivity.class);
@@ -101,17 +107,13 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
         // QR Code Scan Succeed
         else
         {
-            Log.d("MainActivity", "Scanned");
-            try
-            {
-                App.getMe().addContactFromQRString(result.getContents());
-                Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
-                Log.v("TTTT", App.getMe().getContacts().get(0).toStringEncoding());
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
+            Contact c = App.getMe().addContactFromQRString(result.getContents());
+            Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
+            Log.v("TTTT", App.getMe().getContacts().get(0).toStringEncoding());
+
+            AddressBookManager.createContact(c, this);
+
+
         }
 
         super.onActivityResult(requestCode, resultCode, data);

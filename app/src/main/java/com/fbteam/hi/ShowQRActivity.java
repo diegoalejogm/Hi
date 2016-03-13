@@ -28,15 +28,25 @@ public class ShowQRActivity extends AppCompatActivity
         int height = size.y;
 
 
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_qr);
         getSupportActionBar().hide();
 
-        Category c = App.getMe().getCategories().get(0);
-        String codedString = App.getMe().toQRRepresentationWithCategory(c);
+        String catId =getIntent().getExtras().getString("categoryId");
+        for(Category c : App.getMe().getCategories())
+        {
+            if(c.getId().equals(catId))
+            {
+                String codedString = App.getMe().toQRRepresentationWithCategory(c);
+                Bitmap myBitmap = QRCode.from(codedString).withSize(width, width).bitmap();
+                ImageView myImage = (ImageView) findViewById(R.id.imageView);
+                myImage.setImageBitmap(myBitmap);
 
-        Bitmap myBitmap = QRCode.from(codedString).withSize(width, width).bitmap();
-        ImageView myImage = (ImageView) findViewById(R.id.imageView);
-        myImage.setImageBitmap(myBitmap);
+                break;
+            }
+        }
+
+
     }
 }

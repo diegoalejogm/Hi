@@ -48,10 +48,11 @@ public class Link
         return type;
     }
 
-    public Link(String name, String content, boolean verified)
+    public Link(String name, String content, int type, boolean verified)
     {
         this.id = name;
         this.name = name;
+        this.type = type;
         this.content = content;
         this.verified = verified;
 
@@ -60,13 +61,13 @@ public class Link
 
     public String toStringEncoding(String encoding)
     {
-        return name+encoding+content+encoding+verified;
+        return name+encoding+content+encoding+type+encoding+verified;
     }
 
     public static Link fromStringEncoding(String string, String separator)
     {
         String[] attributes = string.split(separator);
-        return new Link(attributes[0],attributes[1], attributes[2]=="true"? true: false);
+        return new Link(attributes[0],attributes[1],Integer.parseInt(attributes[2]), attributes[3]=="true"? true: false);
     }
 
     public void addCategory(Category category)

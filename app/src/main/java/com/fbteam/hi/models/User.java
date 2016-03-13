@@ -3,6 +3,7 @@ package com.fbteam.hi.models;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import com.fbteam.hi.Configuration;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,19 +36,19 @@ public class User {
         // TESTING
         this.firstName = "Mykola";
         this.lastName= "Schevchenko";
-        Link link1 = new Link("facebook", "niksheva", false);
-        Link link2 = new Link("instagram", "niksheva", false);
-        Link link3 = new Link("github", "nshevchenko", false);
+        Link link0 = new Link("Mobile1", "12345678",Configuration.TYPE_LINK_PHONE, false);
+        Link link1 = new Link("Facebook", "http://niksheva.com",Configuration.TYPE_LINK_WEBSITE, false);
+        Link link2 = new Link("Email", "niksheva@hi.com",Configuration.TYPE_LINK_EMAIL, false);
         Category c1 = new Category("Personal");
+        c1.addLink(link0);
         c1.addLink(link1);
         c1.addLink(link2);
         Category c2 = new Category("Professional");
         c2.addLink(link2);
-        c2.addLink(link3);
 
+        links.add(link0);
         links.add(link1);
         links.add(link2);
-        links.add(link3);
 
         categories.add(c1);
         categories.add(c2);
@@ -175,9 +176,11 @@ public class User {
 
     }
 
-    public void addContactFromQRString(String contents)
+    public Contact addContactFromQRString(String contents)
     {
-        contacts.add(Contact.fromStringEncoding(contents));
+        Contact c = Contact.fromStringEncoding(contents);
+        contacts.add(c);
+        return c;
     }
 
     public String toQRRepresentationWithCategory(Category c)
