@@ -152,6 +152,7 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
         if (registered) {
             Log.v("LOGIN_ACTIVITY", "USER ALREADY REGISTERED");
             App.getMe().restore(settings);
+            openHomeActivity(Configuration.OFFLINE_MODE_APP);
         }
         else
         {

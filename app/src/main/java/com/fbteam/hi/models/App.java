@@ -17,6 +17,8 @@ public class App {
         return myself;
     }
 
+
+
     public static void setCurrentUser(User user){
         myself = user;
     }

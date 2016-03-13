@@ -34,5 +34,13 @@
 					android:title="Report Bug"/>
 		</menu>
 	</item>
+	<item android:title="Other">
+		<menu>
+			<item
+					android:id="@+id/nav_logout"
+					android:title="Log Out"/>
+		</menu>
+	</item>
+
 
 </menu>
