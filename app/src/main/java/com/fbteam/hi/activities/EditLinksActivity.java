@@ -1,5 +1,6 @@
 package com.fbteam.hi.activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -8,9 +9,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.fbteam.hi.Configuration;
 import com.fbteam.hi.R;
 import com.fbteam.hi.adapters.CategoryListAdapter;
 import com.fbteam.hi.adapters.EditLinksAdapter;
+import com.fbteam.hi.models.App;
 import com.fbteam.hi.models.Category;
 
 /**
@@ -27,6 +30,8 @@ public class EditLinksActivity extends ActivityNavMenu implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Edit Profile");
         loadNavDrawer(toolbar);
         findElements();
     }
@@ -74,7 +79,9 @@ public class EditLinksActivity extends ActivityNavMenu implements View.OnClickLi
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_menu_done) {
             //save user
-            //TODO: save user here
+            System.out.println("saved user and exit");
+            App.getMe().persist(getSharedPreferences(Configuration.DB_PREFERENCES, Context.MODE_PRIVATE));
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

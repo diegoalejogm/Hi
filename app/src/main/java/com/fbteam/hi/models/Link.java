@@ -22,7 +22,6 @@ public class Link
 
     private int type;
 
-
     public String getName()
     {
         return name;
@@ -73,4 +72,14 @@ public class Link
     {
         categories.add(category);
     }
+
+    public void removeFromCategory(Category category)
+    {
+        Category removeC = null;
+        for(Category tempC: categories)
+            if(tempC.getName().equals(category.getName()))
+                removeC = tempC;
+        categories.remove(removeC);
+    }
+
 }

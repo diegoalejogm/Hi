@@ -83,7 +83,8 @@ public class User {
             {
                 categories.append(category.getId() + separator);
             }
-            categories.setLength(categories.length() - 1);
+            int length = (categories.length() == 0) ? 0 : categories.length() - 1;
+            categories.setLength(length);
             preferences.edit().putString("link/" + (linkCounter++) + "/categories", categories.toString());
         }
 
