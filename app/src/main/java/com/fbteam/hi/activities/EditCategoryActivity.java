@@ -58,18 +58,19 @@ public class EditCategoryActivity extends ActivityNavMenu implements View.OnClic
 
         /// set up list
 
-        links = (ListView) findViewById(R.id.categoriesList);
+        links = (ListView) findViewById(R.id.linksList);
         links.setAdapter(new EditCategoryListAdapter(this, R.layout.edit_category_row, editingCategory));
         links.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Link tempL = editingCategory.getLinks().get(i);
-                CheckBox cb = (CheckBox)view.findViewById(R.id.checkBox);
+                CheckBox cb = (CheckBox) view.findViewById(R.id.checkBox);
                 System.out.println("pressing");
-                if(editingCategory.isLinkInCategory(tempL)) {
+                if (editingCategory.isLinkInCategory(tempL)) {
                     editingCategory.removeLink(tempL);
                     cb.setChecked(false);
-                }else{
+                } else {
                     editingCategory.addLink(tempL);
                     cb.setChecked(true);
                 }
@@ -81,11 +82,11 @@ public class EditCategoryActivity extends ActivityNavMenu implements View.OnClic
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        switch(id){
-            case R.id.FAB_AddFriend:
-
-                break;
-        }
+//        switch(id){
+//            case R.id.FAB_AddFriend:
+//
+//                break;
+//        }
     }
 
     @Override

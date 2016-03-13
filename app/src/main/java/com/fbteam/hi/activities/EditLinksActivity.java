@@ -60,11 +60,11 @@ public class EditLinksActivity extends ActivityNavMenu implements View.OnClickLi
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        switch(id){
-            case R.id.FAB_AddFriend:
-
-                break;
-        }
+//        switch(id){
+//            case R.id.FAB_AddFriend:
+//
+//                break;
+//        }
     }
 
     @Override

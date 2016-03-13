@@ -25,17 +25,17 @@
     <EditText
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:layout_marginLeft="20dp"
-        android:textSize="25sp"
-        android:id="@+id/category_title"
+        android:text="Myk Shevchenko"
+        android:layout_marginLeft="10dp"
+        android:textSize="18sp"
+        android:id="@+id/user_name"
         android:layout_below="@+id/toolbarLayout"
         android:layout_marginTop="10dp" />
 
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linksList"
-        android:layout_below="@+id/category_title"
+        android:id="@+id/categoriesList"
+        android:layout_below="@+id/user_name"
         android:layout_marginTop="10dp" />
 </RelativeLayout>

@@ -51,7 +51,10 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
 
     private void findElements(){
         // Add friend button (FAB)
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.FAB_AddFriend);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_new_category);
+        fab.setOnClickListener(this);
+
+        fab = (FloatingActionButton) findViewById(R.id.scan_qr);
         fab.setOnClickListener(this);
 
         /// set up list
@@ -98,7 +101,10 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
     public void onClick(View view) {
         int id = view.getId();
         switch(id){
-            case R.id.FAB_AddFriend:
+            case R.id.add_new_category:
+
+                break;
+            case R.id.scan_qr:
                 new IntentIntegrator(this)
                         .setCaptureActivity(CaptureQRActivityAnyOrientation.class)
                         .setBeepEnabled(true)
