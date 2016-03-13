@@ -11,10 +11,10 @@
                 android:id="@+id/linkImage"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginStart="24dp"
-                android:src="@android:color/darker_gray"
-            android:layout_centerVertical="true" />
+            android:src="@android:color/darker_gray"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:layout_marginLeft="5dp" />
         <TextView
             android:layout_width="wrap_content"
 
@@ -36,9 +36,10 @@
             android:layout_alignParentRight="true"
             android:textSize="21sp"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="20dp"
             android:textColor="@color/primary_dark"
-            android:textAlignment="center"
-            android:text="nshevchenko" />
+            android:textAlignment="textEnd"
+            android:text="nshevchenko"
+            android:layout_toRightOf="@+id/linkNameTxt" />
     </RelativeLayout>
 </RelativeLayout>

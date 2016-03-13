@@ -25,7 +25,6 @@ public class Configuration {
     public static final int TYPE_LINK_EMAIL =  2;
 
     public static final Map<String, String> links;
-
     static {
         Map<String, String> helper = new HashMap<String, String>();
         helper.put("facebook", "https://facebook.com/");
@@ -34,7 +33,7 @@ public class Configuration {
         helper.put("linkedin", "https://linkedin.com/in/");
         helper.put("twitter", "https://twitter.com/");
         helper.put("snapchat", "https://snapchat.com/add/");
-        helper.put("google+", "https://plus.google.com/");
+        helper.put("google", "https://plus.google.com/");
         helper.put("pinterest", "https://pinterest.com/");
         helper.put("spotify", "https://play.spotify.com/user/");
         helper.put("youtube", "https://youtube.com/channel/");
@@ -42,5 +41,4 @@ public class Configuration {
         helper.put("medium", "https://medium.com/@");
         links = Collections.unmodifiableMap(helper);
     }
-
 }
