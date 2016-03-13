@@ -28,18 +28,18 @@ public class Configuration {
 
     static {
         Map<String, String> helper = new HashMap<String, String>();
-        helper.put("facebook", "https://facebook.com/");
-        helper.put("instagram", "https://instagram.com/");
-        helper.put("github", "https://github.com/");
-        helper.put("linkedin", "https://linkedin.com/in/");
-        helper.put("twitter", "https://twitter.com/");
-        helper.put("snapchat", "https://snapchat.com/add/");
-        helper.put("google+", "https://plus.google.com/");
-        helper.put("pinterest", "https://pinterest.com/");
-        helper.put("spotify", "https://play.spotify.com/user/");
-        helper.put("youtube", "https://youtube.com/channel/");
-        helper.put("tumblr", "https://tumblr.com/blog/");
-        helper.put("medium", "https://medium.com/@");
+        helper.put("Facebook", "https://facebook.com/");
+        helper.put("Instagram", "https://instagram.com/");
+        helper.put("Github", "https://github.com/");
+        helper.put("Linkedin", "https://linkedin.com/in/");
+        helper.put("Twitter", "https://twitter.com/");
+        helper.put("Snapchat", "https://snapchat.com/add/");
+        helper.put("Google+", "https://plus.google.com/");
+        helper.put("Pinterest", "https://pinterest.com/");
+        helper.put("Spotify", "https://play.spotify.com/user/");
+        helper.put("Youtube", "https://youtube.com/channel/");
+        helper.put("Tumblr", "https://tumblr.com/blog/");
+        helper.put("Medium", "https://medium.com/@");
         links = Collections.unmodifiableMap(helper);
     }
 
