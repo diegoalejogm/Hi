@@ -3,18 +3,24 @@ package com.fbteam.hi.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.fbteam.hi.Configuration;
 import com.fbteam.hi.models.App;
 import com.fbteam.hi.R;
 import com.fbteam.hi.models.Link;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class EditLinksAdapter extends ArrayAdapter<Link>{
@@ -51,6 +57,15 @@ public class EditLinksAdapter extends ArrayAdapter<Link>{
             if(link.getName().equals(tempL.getName()))
                 ((EditText) tempLinkViewObject).setText(link.getContent());
         }
+
+        // image setting
+        List keys = new ArrayList(Configuration.links.keySet());
+//        String key = keys.get(position).toString();
+        int id = Configuration.linksPics.get(link.getName());
+//        System.out.println("SHIT  " + key+".png ... " + id);
+
+        tempLinkViewObject = (ImageView)convertView.findViewById(R.id.linkImage);
+        ((ImageView)tempLinkViewObject).setImageResource(id);
         return convertView;
     }
 }

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.fbteam.hi.Configuration;
 import com.fbteam.hi.R;
 import com.fbteam.hi.adapters.CategoryListAdapter;
+import com.fbteam.hi.adapters.DialogSelectListAdapter;
 import com.fbteam.hi.adapters.EditLinksAdapter;
 import com.fbteam.hi.models.App;
 import com.fbteam.hi.models.Category;
@@ -130,9 +131,7 @@ public class EditLinksActivity extends ActivityNavMenu implements View.OnClickLi
 //        builderSingle.setIcon(R.drawable.ic_launcher);
         builderSingle.setTitle("Select One Name:-");
 
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                this,
-                R.layout.link_dialog_singlechoice, R.id.linkTypeNameTxt, new ArrayList<String>());
+        final DialogSelectListAdapter arrayAdapter = new DialogSelectListAdapter(this,  R.layout.link_dialog_singlechoice);
 
         for (String key : Configuration.links.keySet()) {
 //            System.out.println(pair.getKey() + " = " + pair.getValue());
