@@ -71,7 +71,9 @@ public class ActivityNavMenu extends AppCompatActivity
             case R.id.nav_new_category:
 //                App.openActivity(this, EditCategoryActivity.class);
                 Category cat = new Category("New");
-
+                break;
+            case R.id.nav_history:
+                App.openActivity(this, HistoryActivity.class);
                 break;
         }
 

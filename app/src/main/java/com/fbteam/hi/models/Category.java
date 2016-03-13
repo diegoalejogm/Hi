@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.fbteam.hi.ShowQRActivity;
 
+import java.security.SecurityPermission;
 import java.util.ArrayList;
 
 /**
@@ -82,7 +83,7 @@ public class Category
     }
 
     public String toStringEncoding(String separator) {
-        StringBuffer sb = new StringBuffer(name);
+        StringBuffer sb = new StringBuffer(name+separator);
         for (Link link : this.links) {
             sb.append(link.getId() + separator);
         }

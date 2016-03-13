@@ -8,8 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 
+import android.widget.TextView;
 import com.fbteam.hi.Configuration;
 import com.fbteam.hi.R;
 import com.fbteam.hi.adapters.CategoryListAdapter;
@@ -44,11 +46,12 @@ public class EditLinksActivity extends ActivityNavMenu implements View.OnClickLi
         links = (ListView) findViewById(R.id.categoriesList);
         links.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
         links.setAdapter(new EditLinksAdapter(this, R.layout.edit_link_row));
-        links.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        links.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
                 Category clickedShout = (Category) adapterView.getItemAtPosition(i);
-
             }
         });
 
@@ -80,15 +83,23 @@ public class EditLinksActivity extends ActivityNavMenu implements View.OnClickLi
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_menu_done) {
-            //save user
-            System.out.println("saved user and exit");
-            App.getMe().persist(getSharedPreferences(Configuration.DB_PREFERENCES, Context.MODE_PRIVATE));
+
+            updateChanges();
             finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    public void updateChanges()
+    {
+        for(int i = 0; i < links.getChildCount() ; i++)
+        {
+            EditText newContent= (EditText)links.getChildAt(i).findViewById(R.id.editContent);
+            App.getMe().getLinks().get(i).setContent(newContent.getText().toString());
+        }
+        App.getMe().persist(getSharedPreferences(Configuration.DB_PREFERENCES, Context.MODE_PRIVATE));
+    }
 }
 
 

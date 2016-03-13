@@ -63,6 +63,11 @@ public class Link
         return name+encoding+content+encoding+type+encoding+verified;
     }
 
+    public void setContent(String content)
+    {
+        this.content = content;
+    }
+
     public static Link fromStringEncoding(String string, String separator)
     {
         String[] attributes = string.split(separator);
