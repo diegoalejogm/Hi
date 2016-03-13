@@ -7,19 +7,31 @@
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="200px"
+        android:layout_height="160px"
         android:layout_centerInParent="true">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:text="Professional"
+            android:layout_alignParentTop="true"
             android:id="@+id/categoryNameTxt"
             android:layout_gravity="left"
-            android:layout_marginTop="10dp"
-            android:textSize="25sp"
-            android:textColor="@color/accent"
+            android:textSize="20sp"
+            android:textColor="@color/primary_text"
             android:layout_centerInParent="true" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Professional"
+                android:id="@+id/categoryDescriptionTxt"
+                android:layout_gravity="left"
+                android:textSize="11sp"
+                android:textColor="@color/secondary_text"
+                android:layout_below="@id/categoryNameTxt"
+                android:layout_centerInParent="true" />
 
     </RelativeLayout>
 </RelativeLayout>

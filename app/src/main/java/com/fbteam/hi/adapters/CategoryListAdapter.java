@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.fbteam.hi.models.App;
 import com.fbteam.hi.R;
 import com.fbteam.hi.models.Category;
+import com.fbteam.hi.models.Link;
 
 
 public class CategoryListAdapter extends ArrayAdapter<Category>{
@@ -43,6 +44,15 @@ public class CategoryListAdapter extends ArrayAdapter<Category>{
 
         View tempShoutViewObject = (TextView)convertView.findViewById(R.id.categoryNameTxt);
         ((TextView)tempShoutViewObject).setText(category.getName());
+
+        StringBuffer sb = new StringBuffer();
+        for(Link l : category.getLinks())
+        {
+            sb.append(l.getName()+", ");
+        }
+        sb.setLength(sb.length()-2);
+        View tempShoutViewObject2 = (TextView)convertView.findViewById(R.id.categoryDescriptionTxt);
+        ((TextView)tempShoutViewObject2).setText(sb.toString());
 
 //        AppManager.fontTextView(nameLabel, 23);
 
