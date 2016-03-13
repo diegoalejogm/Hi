@@ -142,14 +142,20 @@ public class LoginActivity extends Activity implements View.OnClickListener  {
      */
     public void setInitialData(){
         // read if user is here the first time ever or restore
-        User me = new User();
 
-        App.setCurrentUser(me);
         SharedPreferences settings = getSharedPreferences(Configuration.DB_PREFERENCES, 0);
-        boolean registered = settings.getBoolean("registered", true);
+        boolean registered = settings.getBoolean("registered", false);
+
+        User me = new User();
+        App.setCurrentUser(me);
 
         if (registered) {
-//            App.getMe().restore();
+            Log.v("LOGIN_ACTIVITY", "USER ALREADY REGISTERED");
+            App.getMe().restore(settings);
+        }
+        else
+        {
+//            me.addTestData();
         }
 
 //        // download app data with the related callback

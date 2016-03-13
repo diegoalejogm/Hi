@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/feedsLayoutBg"
+    android:weightSum="1.0">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="100px"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Professional"
+            android:id="@+id/linkTypeNameTxt"
+            android:layout_gravity="left"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            android:textColor="@color/primary_text"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp" />
+
+    </RelativeLayout>
+</RelativeLayout>

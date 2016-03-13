@@ -30,9 +30,11 @@ public class User {
         links = new ArrayList<>();
         categories = new ArrayList<>();
         contacts = new ArrayList<>();
-
         //public Link(String name, String content, boolean verified)
+    }
 
+    public void addTestData()
+    {
         // TESTING
         this.firstName = "Mykola";
         this.lastName= "Schevchenko";
@@ -65,21 +67,25 @@ public class User {
     }
 
     public void addLinkNoCategory(Link newLink) {
+        for(Link tempL : links)
+            if(newLink.getName().equals(tempL.getName()))
+                return;
         this.links.add(newLink);
     }
 
     public void persist(SharedPreferences preferences)
     {
+        SharedPreferences.Editor editor=preferences.edit();
         int categoryCounter = 0;
         int linkCounter = 0;
 
         String separator = ",";
 
-        preferences.edit().putString("user", this.toStringEncoding(separator));
+        editor.putString("user", this.toStringEncoding(separator));
 
         for(Link link: this.links)
         {
-            preferences.edit().putString("link/"+linkCounter, link.toStringEncoding(separator));
+            editor.putString("link/" + linkCounter, link.toStringEncoding(separator));
             StringBuffer categories = new StringBuffer();
             for(Category category : link.getCategories())
             {
@@ -87,13 +93,16 @@ public class User {
             }
             int length = (categories.length() == 0) ? 0 : categories.length() - 1;
             categories.setLength(length);
-            preferences.edit().putString("link/" + (linkCounter++) + "/categories", categories.toString());
+            editor.putString("link/" + (linkCounter++) + "/categories", categories.toString());
         }
 
         for(Category category : this.categories)
         {
-            preferences.edit().putString("category/" + (categoryCounter++), category.toStringEncoding(separator));
+            editor.putString("category/" + (categoryCounter++), category.toStringEncoding(separator));
         }
+
+        editor.putBoolean("registered", true);
+        editor.commit();
     }
 
     private String toStringEncoding(String separator)

@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.fbteam.hi.ShowQRActivity;
 
+import java.security.SecurityPermission;
 import java.util.ArrayList;
 
 /**
@@ -40,10 +41,15 @@ public class Category
     }
 
 
+    public void setNewTitle(String title){
+        this.name = title;
+    }
     public void addLink(Link link)
     {
-        links.add(link);
-        link.addCategory(this);
+        if(!isLinkInCategory(link)) {
+            links.add(link);
+            link.addCategory(this);
+        }
     }
 
     public void removeLink(Link link)
@@ -52,8 +58,10 @@ public class Category
         for(Link tempL : links)
             if(tempL.getName().equals(link.getName()))
                 remove = tempL;
-        links.remove(remove);
-        link.removeFromCategory(this);
+        if(remove != null) {
+            links.remove(remove);
+            link.removeFromCategory(this);
+        }
     }
 
 
@@ -82,7 +90,7 @@ public class Category
     }
 
     public String toStringEncoding(String separator) {
-        StringBuffer sb = new StringBuffer(name);
+        StringBuffer sb = new StringBuffer(name+separator);
         for (Link link : this.links) {
             sb.append(link.getId() + separator);
         }

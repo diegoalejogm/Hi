@@ -29,7 +29,7 @@ public class EditCategoryListAdapter extends ArrayAdapter<Link> {
 
     public EditCategoryListAdapter(Context ctx, int resourceId, Category category)
     {
-        super(ctx, resourceId, category.getLinks());
+        super(ctx, resourceId, App.getMe().getLinks());
         resource = resourceId;
         editingCategory = category;
         inflater = LayoutInflater.from( ctx );
@@ -40,7 +40,7 @@ public class EditCategoryListAdapter extends ArrayAdapter<Link> {
     public View getView ( int position, View convertView, ViewGroup parent )
     {
         convertView = (RelativeLayout) inflater.inflate( resource, null );
-        Link link = editingCategory.getLinks().get(position);
+        Link link = App.getMe().getLinks().get(position);
 
         System.out.println(position + " " + link.getName());
         if(position % 2 == 1)

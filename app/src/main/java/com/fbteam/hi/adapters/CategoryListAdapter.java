@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.fbteam.hi.models.App;
 import com.fbteam.hi.R;
 import com.fbteam.hi.models.Category;
+import com.fbteam.hi.models.Link;
 
 
 public class CategoryListAdapter extends ArrayAdapter<Category>{
@@ -44,12 +45,17 @@ public class CategoryListAdapter extends ArrayAdapter<Category>{
         View tempShoutViewObject = (TextView)convertView.findViewById(R.id.categoryNameTxt);
         ((TextView)tempShoutViewObject).setText(category.getName());
 
-//        AppManager.fontTextView(nameLabel, 23);
+        StringBuffer sb = new StringBuffer();
+        for(Link l : category.getLinks())
+        {
+            sb.append(l.getName()+", ");
+        }
+        if(sb.length() >= 2) {
+            sb.setLength(sb.length()-2);
+        }
+        View tempShoutViewObject2 = (TextView)convertView.findViewById(R.id.categoryDescriptionTxt);
+        ((TextView)tempShoutViewObject2).setText(sb.toString());
 
-//        TriggerButtonUI ten = new TriggerButtonUI( (Button)convertView.findViewById(R.id.ten), activityName.addPurchase );
-//        ten.setId(position);
-//        TriggerButtonUI twenty = new TriggerButtonUI( (Button)convertView.findViewById(R.id.twenty), activityName.addPurchase);
-//        twenty.setId(position);
         return convertView;
     }
 }
