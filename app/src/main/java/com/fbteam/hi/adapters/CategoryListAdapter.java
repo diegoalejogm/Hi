@@ -2,6 +2,7 @@ package com.fbteam.hi.adapters;
 
 
 import android.content.Context;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class CategoryListAdapter extends ArrayAdapter<Category>{
         View tempShoutViewObject = (TextView)convertView.findViewById(R.id.categoryNameTxt);
         ((TextView)tempShoutViewObject).setText(category.getName());
 
+        TextView tempShoutViewObject2 = (TextView)convertView.findViewById(R.id.categoryDescriptionTxt);
         StringBuffer sb = new StringBuffer();
         for(Link l : category.getLinks())
         {
@@ -53,7 +55,13 @@ public class CategoryListAdapter extends ArrayAdapter<Category>{
         if(sb.length() >= 2) {
             sb.setLength(sb.length()-2);
         }
-        View tempShoutViewObject2 = (TextView)convertView.findViewById(R.id.categoryDescriptionTxt);
+        else
+        {
+            sb.append("Empty");
+            final TypedValue value = new TypedValue();
+            tempShoutViewObject2.setTextColor( context.getResources().getColor(R.color.accent));
+        }
+
         ((TextView)tempShoutViewObject2).setText(sb.toString());
 
         return convertView;
