@@ -213,6 +213,7 @@ public class User {
 
     public String getFullName()
     {
+        if(firstName == null && lastName == null) return "";
         return firstName + ((!lastName.equals(""))? " " + lastName:"");
     }
 

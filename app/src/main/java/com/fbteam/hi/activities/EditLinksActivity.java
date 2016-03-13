@@ -63,9 +63,6 @@ public class EditLinksActivity extends ActivityNavMenu implements View.OnClickLi
         // Add friend button (FAB)
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_new_link);
         fab.setOnClickListener(this);
-
-        fab = (FloatingActionButton) findViewById(R.id.scan_qr);
-        fab.setOnClickListener(this);
     }
 
     @Override

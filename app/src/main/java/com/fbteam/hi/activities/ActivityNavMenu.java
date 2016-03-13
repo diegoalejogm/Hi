@@ -48,6 +48,7 @@ public class ActivityNavMenu extends AppCompatActivity
         tv = (TextView) headerView.findViewById(R.id.emailTextView);
         Link email = App.getMe().getFirstEmail();
         if(email != null) tv.setText(email.getContent());
+        else tv.setText("");
 
 
         navigationView.setNavigationItemSelectedListener(this);
