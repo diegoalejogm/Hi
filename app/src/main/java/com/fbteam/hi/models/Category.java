@@ -41,10 +41,15 @@ public class Category
     }
 
 
+    public void setNewTitle(String title){
+        this.name = title;
+    }
     public void addLink(Link link)
     {
-        links.add(link);
-        link.addCategory(this);
+        if(!isLinkInCategory(link)) {
+            links.add(link);
+            link.addCategory(this);
+        }
     }
 
     public void removeLink(Link link)
@@ -53,8 +58,10 @@ public class Category
         for(Link tempL : links)
             if(tempL.getName().equals(link.getName()))
                 remove = tempL;
-        links.remove(remove);
-        link.removeFromCategory(this);
+        if(remove != null) {
+            links.remove(remove);
+            link.removeFromCategory(this);
+        }
     }
 
 

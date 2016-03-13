@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,7 +31,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 public class EditCategoryActivity extends ActivityNavMenu implements View.OnClickListener {
 
     // list view
-    private ListView links;
+    private ListView links ;
     private Category editingCategory;
 
     @Override
@@ -64,16 +65,12 @@ public class EditCategoryActivity extends ActivityNavMenu implements View.OnClic
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Link tempL = editingCategory.getLinks().get(i);
+                Link tempL = App.getMe().getLinks().get(i);
                 CheckBox cb = (CheckBox) view.findViewById(R.id.checkBox);
-                System.out.println("pressing");
-                if (editingCategory.isLinkInCategory(tempL)) {
-                    editingCategory.removeLink(tempL);
+                if (cb.isChecked())
                     cb.setChecked(false);
-                } else {
-                    editingCategory.addLink(tempL);
+                else
                     cb.setChecked(true);
-                }
             }
         });
 
@@ -105,12 +102,31 @@ public class EditCategoryActivity extends ActivityNavMenu implements View.OnClic
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_menu_done) {
             //save user
-            System.out.println("saved user and exit");
+            updateChanges();
             App.getMe().persist(getSharedPreferences(Configuration.DB_PREFERENCES, Context.MODE_PRIVATE));
             finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void updateChanges()
+    {
+        View child = (EditText)findViewById(R.id.category_title);
+        editingCategory.setNewTitle(((EditText)child).getText().toString());
+
+        for(int i = 0; i < App.getMe().getLinks().size(); i++){
+
+            Link tempL = App.getMe().getLinks().get(i);
+            child = links.getChildAt(i);
+            CheckBox newCheck = (CheckBox)child.findViewById(R.id.checkBox);
+            if(newCheck.isChecked()) {
+                editingCategory.addLink(tempL);
+            }else {
+                editingCategory.removeLink(tempL);
+            }
+        }
+        App.getMe().persist(getSharedPreferences(Configuration.DB_PREFERENCES, Context.MODE_PRIVATE));
     }
 }
 

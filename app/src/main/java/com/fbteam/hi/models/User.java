@@ -30,7 +30,6 @@ public class User {
         links = new ArrayList<>();
         categories = new ArrayList<>();
         contacts = new ArrayList<>();
-
         //public Link(String name, String content, boolean verified)
     }
 

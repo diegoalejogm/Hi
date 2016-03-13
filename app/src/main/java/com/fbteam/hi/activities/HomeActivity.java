@@ -76,14 +76,14 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int pos, long id) {
-                processLongClickOnCategory(pos);
+                clickOnAndEditCategory(pos);
                 return true;
             }
         });
     }
 
 
-    private void processLongClickOnCategory(int id){
+    private void clickOnAndEditCategory(int id){
         System.out.println("category pro-clicked " + id);
         Intent intent = new Intent(this, EditCategoryActivity.class);
         intent.putExtra(Configuration.CATEGORY_ID, id);
@@ -102,7 +102,10 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
         int id = view.getId();
         switch(id){
             case R.id.add_new_category:
-
+                Category newCategory = new Category("New");
+                App.getMe().getCategories().add(newCategory);
+                int categoryID = App.getMe().getCategories().size() - 1;
+                clickOnAndEditCategory(categoryID);
                 break;
             case R.id.scan_qr:
                 new IntentIntegrator(this)
