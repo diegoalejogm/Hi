@@ -81,6 +81,10 @@ public class Contact
         this.added = added;
     }
 
+    public String getName() {
+        return this.firstName + " " + this.lastName;
+    }
+
     public static Contact fromUserAndCategory(User user, Category category)
     {
         return new Contact(user.getFirstName(), user.getLastName(), category.getLinks());

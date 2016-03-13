@@ -6,6 +6,7 @@
 
     <string name="action_settings">Settings</string>
 	<string name="title_activity_capture_qractivity_any_orientation">CaptureQRActivityAnyOrientation</string>
+    <string name="history">Contacts History</string>
 
     <string name="facebook_app_id">1727757680802078</string>
 </resources>
