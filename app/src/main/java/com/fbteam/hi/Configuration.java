@@ -33,7 +33,7 @@ public class Configuration {
         helper.put("Linkedin", "https://linkedin.com/in/");
         helper.put("Twitter", "https://twitter.com/");
         helper.put("Snapchat", "https://snapchat.com/add/");
-        helper.put("Google+", "https://plus.google.com/");
+        helper.put("Google", "https://plus.google.com/");
         helper.put("Pinterest", "https://pinterest.com/");
         helper.put("Spotify", "https://play.spotify.com/user/");
         helper.put("Youtube", "https://youtube.com/channel/");
@@ -46,18 +46,18 @@ public class Configuration {
     public static final Map<String, Integer> linksPics;
     static {
         Map<String, Integer> helper = new HashMap<String, Integer>();
-        helper.put("facebook", R.mipmap.fb);
-        helper.put("instagram",R.mipmap.instagram);
-        helper.put("github", R.mipmap.github);
-        helper.put("linkedin", R.mipmap.linkedin);
-        helper.put("twitter",R.mipmap.twitter);
-        helper.put("snapchat", R.mipmap.snapchat);
-        helper.put("google",  R.mipmap.google);
-        helper.put("pinterest", R.mipmap.pinterest);
-        helper.put("spotify", R.mipmap.spotify);
-        helper.put("youtube", R.mipmap.youtube);
-        helper.put("tumblr",  R.mipmap.tumblr);
-        helper.put("medium",  R.mipmap.medium);
+        helper.put("Facebook", R.mipmap.fb);
+        helper.put("Instagram",R.mipmap.instagram);
+        helper.put("Github", R.mipmap.github);
+        helper.put("Linkedin", R.mipmap.linkedin);
+        helper.put("Twitter",R.mipmap.twitter);
+        helper.put("Snapchat", R.mipmap.snapchat);
+        helper.put("Google",  R.mipmap.google);
+        helper.put("Pinterest", R.mipmap.pinterest);
+        helper.put("Spotify", R.mipmap.spotify);
+        helper.put("Youtube", R.mipmap.youtube);
+        helper.put("Tumblr",  R.mipmap.tumblr);
+        helper.put("Medium",  R.mipmap.medium);
         linksPics = Collections.unmodifiableMap(helper);
     }
 }

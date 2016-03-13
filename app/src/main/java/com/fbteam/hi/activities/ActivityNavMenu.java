@@ -50,7 +50,6 @@ public class ActivityNavMenu extends AppCompatActivity
         if(email != null) tv.setText(email.getContent());
         else tv.setText("");
 
-
         navigationView.setNavigationItemSelectedListener(this);
     }
 
