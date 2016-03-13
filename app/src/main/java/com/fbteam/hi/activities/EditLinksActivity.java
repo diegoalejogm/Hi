@@ -153,7 +153,10 @@ public class EditLinksActivity extends ActivityNavMenu implements View.OnClickLi
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String strName = arrayAdapter.getItem(which);
-                        Link newL = new Link(strName, "", Configuration.TYPE_LINK_WEBSITE, false);
+                        int type = Configuration.TYPE_LINK_WEBSITE;
+                        if(strName.equals("Phone")) type = Configuration.TYPE_LINK_PHONE;
+                        else if(strName.equals("Email")) type = Configuration.TYPE_LINK_EMAIL;
+                        Link newL = new Link(strName, "", type, false);
                         App.getMe().addLinkNoCategory(newL);
                         links.invalidateViews();
                     }
