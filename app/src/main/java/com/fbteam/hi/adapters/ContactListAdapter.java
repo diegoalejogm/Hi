@@ -13,6 +13,8 @@ import com.fbteam.hi.models.App;
 import com.fbteam.hi.models.Category;
 import com.fbteam.hi.models.Contact;
 
+import java.text.SimpleDateFormat;
+
 /**
  * Created by leticiawanderley on 13/03/2016.
  */
@@ -35,8 +37,12 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
         convertView = (RelativeLayout) inflater.inflate( resource, null );
         Contact contact = App.getMe().getContacts().get(position);
 
-        View tempShoutViewObject = (TextView)convertView.findViewById(R.id.contactNameTxt);
-        ((TextView)tempShoutViewObject).setText(contact.getFullName());
+        TextView tempShoutViewObject = (TextView)convertView.findViewById(R.id.contactNameTxt);
+        tempShoutViewObject.setText(contact.getFullName());
+
+        tempShoutViewObject = (TextView)convertView.findViewById(R.id.contactDetailsTxt);
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        tempShoutViewObject.setText(format.format(contact.getAdded()));
 
         return convertView;
     }
