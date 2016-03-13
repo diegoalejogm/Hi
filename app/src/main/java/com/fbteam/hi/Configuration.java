@@ -25,6 +25,7 @@ public class Configuration {
     public static final int TYPE_LINK_EMAIL =  2;
 
     public static final Map<String, String> links;
+
     static {
         Map<String, String> helper = new HashMap<String, String>();
         helper.put("facebook", "https://facebook.com/");

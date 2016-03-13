@@ -50,16 +50,12 @@ public class CategoryListAdapter extends ArrayAdapter<Category>{
         {
             sb.append(l.getName()+", ");
         }
-        sb.setLength(sb.length()-2);
+        if(sb.length() >= 2) {
+            sb.setLength(sb.length()-2);
+        }
         View tempShoutViewObject2 = (TextView)convertView.findViewById(R.id.categoryDescriptionTxt);
         ((TextView)tempShoutViewObject2).setText(sb.toString());
 
-//        AppManager.fontTextView(nameLabel, 23);
-
-//        TriggerButtonUI ten = new TriggerButtonUI( (Button)convertView.findViewById(R.id.ten), activityName.addPurchase );
-//        ten.setId(position);
-//        TriggerButtonUI twenty = new TriggerButtonUI( (Button)convertView.findViewById(R.id.twenty), activityName.addPurchase);
-//        twenty.setId(position);
         return convertView;
     }
 }

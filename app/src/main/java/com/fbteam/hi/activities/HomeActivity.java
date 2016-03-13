@@ -49,6 +49,13 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
         findElements();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        categoriesList.invalidateViews();
+    }
+
+
     private void findElements(){
         // Add friend button (FAB)
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_new_category);
@@ -60,13 +67,12 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
         /// set up list
         categoriesList = (ListView) findViewById(R.id.categoriesList);
         categoriesList.setAdapter(new CategoryListAdapter(this, R.layout.category_row));
-        categoriesList.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        categoriesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
 
 
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                System.out.println("on item click" + i + " " + l + " "  + view.getId());
+                System.out.println("on item click" + i + " " + l + " " + view.getId());
                 Category category = (Category) adapterView.getItemAtPosition(i);
                 // create
                 showQR(category);
@@ -76,19 +82,13 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int pos, long id) {
-                processLongClickOnCategory(pos);
+                clickOnAndEditCategory(pos);
                 return true;
             }
         });
     }
 
 
-    private void processLongClickOnCategory(int id){
-        System.out.println("category pro-clicked " + id);
-        Intent intent = new Intent(this, EditCategoryActivity.class);
-        intent.putExtra(Configuration.CATEGORY_ID, id);
-        startActivityForResult(intent, 9090);
-    }
 
     private void showQR(Category category){
 
@@ -102,7 +102,10 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
         int id = view.getId();
         switch(id){
             case R.id.add_new_category:
-
+                Category newCategory = new Category("New");
+                App.getMe().getCategories().add(newCategory);
+                int categoryID = App.getMe().getCategories().size() - 1;
+                clickOnAndEditCategory(categoryID);
                 break;
             case R.id.scan_qr:
                 new IntentIntegrator(this)
@@ -114,6 +117,12 @@ public class HomeActivity extends ActivityNavMenu implements View.OnClickListene
         }
     }
 
+    private void createNewCategory(){
+        Category newCategory = new Category("New");
+        App.getMe().getCategories().add(newCategory);
+        int categoryID = App.getMe().getCategories().size() - 1;
+        clickOnAndEditCategory(categoryID);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)

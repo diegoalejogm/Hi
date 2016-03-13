@@ -1,13 +1,17 @@
 package com.fbteam.hi.activities;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -18,6 +22,11 @@ import com.fbteam.hi.adapters.CategoryListAdapter;
 import com.fbteam.hi.adapters.EditLinksAdapter;
 import com.fbteam.hi.models.App;
 import com.fbteam.hi.models.Category;
+import com.fbteam.hi.models.Link;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by nik on 12/03/16.
@@ -31,7 +40,7 @@ public class EditLinksActivity extends ActivityNavMenu implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_edit_links);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Edit Profile");
@@ -46,25 +55,27 @@ public class EditLinksActivity extends ActivityNavMenu implements View.OnClickLi
         links = (ListView) findViewById(R.id.categoriesList);
         links.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
         links.setAdapter(new EditLinksAdapter(this, R.layout.edit_link_row));
-        links.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-            {
-                Category clickedShout = (Category) adapterView.getItemAtPosition(i);
-            }
-        });
 
+
+        // Add friend button (FAB)
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_new_link);
+        fab.setOnClickListener(this);
+
+        fab = (FloatingActionButton) findViewById(R.id.scan_qr);
+        fab.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         int id = view.getId();
-//        switch(id){
-//            case R.id.FAB_AddFriend:
-//
-//                break;
-//        }
+        switch(id){
+            case R.id.scan_qr:
+
+                break;
+            case R.id.add_new_link:
+                createDialogWithSelection();
+                break;
+        }
     }
 
     @Override
@@ -93,12 +104,62 @@ public class EditLinksActivity extends ActivityNavMenu implements View.OnClickLi
 
     public void updateChanges()
     {
+        View tempV = this.findViewById(R.id.user_name);
+        try{
+            String newName = ((EditText)tempV).getText().toString();
+            System.out.println("going " + newName);
+            String[] names = newName.split(" ");
+            App.getMe().setFirstName(names[0]);
+            App.getMe().setLastName(names[1]);
+            System.out.println("going " + names.length);
+            System.out.println("going " + names[0]);
+        } catch(NullPointerException e){
+            System.out.println(e.getCause());
+        }
+
         for(int i = 0; i < links.getChildCount() ; i++)
         {
             EditText newContent= (EditText)links.getChildAt(i).findViewById(R.id.editContent);
             App.getMe().getLinks().get(i).setContent(newContent.getText().toString());
         }
         App.getMe().persist(getSharedPreferences(Configuration.DB_PREFERENCES, Context.MODE_PRIVATE));
+    }
+
+    public void createDialogWithSelection(){
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
+//        builderSingle.setIcon(R.drawable.ic_launcher);
+        builderSingle.setTitle("Select One Name:-");
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                R.layout.link_dialog_singlechoice, R.id.linkTypeNameTxt, new ArrayList<String>());
+
+        for (String key : Configuration.links.keySet()) {
+//            System.out.println(pair.getKey() + " = " + pair.getValue());
+            arrayAdapter.add(key + "");
+        }
+
+        builderSingle.setNegativeButton(
+                "cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        builderSingle.setAdapter(
+                arrayAdapter,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String strName = arrayAdapter.getItem(which);
+                        Link newL = new Link(strName, "", Configuration.TYPE_LINK_WEBSITE, false);
+                        App.getMe().addLinkNoCategory(newL);
+                        links.invalidateViews();
+                    }
+                });
+        builderSingle.show();
     }
 }
 

@@ -32,11 +32,13 @@
 		<activity
 			android:name=".activities.EditCategoryActivity"
 			android:label="@string/title_activity_capture_qractivity_any_orientation"
+			android:windowSoftInputMode="adjustPan"
 			android:theme="@style/AppTheme.NoActionBar">
 		</activity>
 		<activity
 			android:name=".activities.EditLinksActivity"
 			android:label="@string/title_activity_capture_qractivity_any_orientation"
+			android:windowSoftInputMode="adjustPan"
 			android:theme="@style/AppTheme.NoActionBar">
 		</activity>
 		<activity

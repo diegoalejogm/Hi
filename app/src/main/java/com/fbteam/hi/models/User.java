@@ -30,7 +30,6 @@ public class User {
         links = new ArrayList<>();
         categories = new ArrayList<>();
         contacts = new ArrayList<>();
-
         //public Link(String name, String content, boolean verified)
     }
 
@@ -68,6 +67,9 @@ public class User {
     }
 
     public void addLinkNoCategory(Link newLink) {
+        for(Link tempL : links)
+            if(newLink.getName().equals(tempL.getName()))
+                return;
         this.links.add(newLink);
     }
 

@@ -1,5 +1,6 @@
 package com.fbteam.hi.activities;
 
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,6 +12,9 @@ import android.view.MenuItem;
 
 import android.view.View;
 import android.widget.TextView;
+
+import com.fbteam.hi.Configuration;
+
 import com.fbteam.hi.R;
 import com.fbteam.hi.helper.CaptureQRActivityAnyOrientation;
 import com.fbteam.hi.models.App;
@@ -82,8 +86,10 @@ public class ActivityNavMenu extends AppCompatActivity
                 App.openActivity(this, EditLinksActivity.class);
                 break;
             case R.id.nav_new_category:
-//                App.openActivity(this, EditCategoryActivity.class);
-                Category cat = new Category("New");
+                Category newCategory = new Category("New");
+                App.getMe().getCategories().add(newCategory);
+                int categoryID = App.getMe().getCategories().size() - 1;
+                clickOnAndEditCategory(categoryID);
                 break;
             case R.id.nav_history:
                 App.openActivity(this, HistoryActivity.class);
@@ -93,5 +99,13 @@ public class ActivityNavMenu extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return false;
+    }
+
+
+    protected void clickOnAndEditCategory(int id){
+        System.out.println("category pro-clicked " + id);
+        Intent intent = new Intent(this, EditCategoryActivity.class);
+        intent.putExtra(Configuration.CATEGORY_ID, id);
+        startActivityForResult(intent, 9090);
     }
 }
